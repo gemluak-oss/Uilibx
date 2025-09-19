@@ -262,10 +262,18 @@ function Framework:CreateWindow(Settings)
         local BtnCorner = Instance.new("UICorner", TabButton)
         BtnCorner.CornerRadius = UDim.new(0, 8)
 
+        -- Separator di bawah tab bar
+        local Separator = Instance.new("Frame")
+        Separator.Size = UDim2.new(1, -20, 0, 1)
+        Separator.Position = UDim2.new(0, 10, 0, 85) -- posisinya setelah tab bar
+        Separator.BackgroundColor3 = Color3.fromRGB(120, 120, 120) -- abu2 gelap
+        Separator.BorderSizePixel = 0
+        Separator.Parent = Main
+
         -- Konten tab
         local TabContent = Instance.new("ScrollingFrame")
-        TabContent.Size = UDim2.new(1, -20, 1, -90)
-        TabContent.Position = UDim2.new(0, 10, 0, 85)
+        TabContent.Size = UDim2.new(1, -20, 1, -110)
+        TabContent.Position = UDim2.new(0, 10, 0, 95)
         TabContent.BackgroundTransparency = 1
         TabContent.ScrollBarThickness = 6 -- bisa 0 kalau mau tanpa bar
         TabContent.ClipsDescendants = true
