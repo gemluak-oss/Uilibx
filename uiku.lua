@@ -1,4 +1,5 @@
 local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
 local Framework = {}
 
 -- 🎬 Intro Custom
@@ -12,7 +13,6 @@ local function ShowIntro()
     Frame.Position = UDim2.new(0.5, -150, 0.5, -50)
     Frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
     Frame.Parent = IntroGui
-    
 
     local Label = Instance.new("TextLabel")
     Label.Size = UDim2.new(1, 0, 1, 0)
@@ -52,9 +52,6 @@ function Framework:CreateWindow(Settings)
     Main.Position = UDim2.new(0.5, -250, 0.5, -175)
     Main.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
     Main.Parent = ScreenGui
-    Main.Active = true
-    Main.Draggable = true
-
 
     local Title = Instance.new("TextLabel")
     Title.Size = UDim2.new(1, 0, 0, 30)
@@ -66,6 +63,45 @@ function Framework:CreateWindow(Settings)
     Title.Parent = Main
 
     Window.Main = Main
+
+    -- ⚡ Draggable system
+    do
+        local dragging, dragInput, dragStart, startPos
+
+        local function update(input)
+            local delta = input.Position - dragStart
+            Main.Position = UDim2.new(
+                startPos.X.Scale, startPos.X.Offset + delta.X,
+                startPos.Y.Scale, startPos.Y.Offset + delta.Y
+            )
+        end
+
+        Main.InputBegan:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                dragging = true
+                dragStart = input.Position
+                startPos = Main.Position
+
+                input.Changed:Connect(function()
+                    if input.UserInputState == Enum.UserInputState.End then
+                        dragging = false
+                    end
+                end)
+            end
+        end)
+
+        Main.InputChanged:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseMovement then
+                dragInput = input
+            end
+        end)
+
+        UserInputService.InputChanged:Connect(function(input)
+            if input == dragInput and dragging then
+                update(input)
+            end
+        end)
+    end
 
     -- 📑 Tab system
     function Window:CreateTab(TabName)
