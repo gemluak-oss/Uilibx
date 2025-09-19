@@ -36,8 +36,9 @@ local function ShowIntro()
 end
 
 -- 🏠 Create Window
-ShowIntro()
+
 function Framework:CreateWindow(Settings)
+    ShowIntro()
     local Window = {}
     local ScreenGui = Instance.new("ScreenGui")
     ScreenGui.Name = Settings.Name or "RuinzUI"
