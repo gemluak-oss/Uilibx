@@ -78,7 +78,7 @@ function Framework:CreateWindow(Settings)
         -- 🔘 Tombol Hide di pojok kanan atas
     local HideButton = Instance.new("TextButton")
     HideButton.Size = UDim2.new(0, 30, 0, 30)
-    HideButton.Position = UDim2.new(1, -40, 0, 2)
+    HideButton.Position = UDim2.new(1, -35, 0, 2)
     HideButton.Text = "–"
     HideButton.Font = Enum.Font.GothamBold
     HideButton.TextSize = 18
@@ -98,7 +98,7 @@ function Framework:CreateWindow(Settings)
     UnhideBox.TextSize = 14
     UnhideBox.TextColor3 = Color3.fromRGB(255, 255, 255)
     UnhideBox.BackgroundColor3 = Color3.fromRGB(50, 150, 250)
-    UnhideBox.Visible = false -- default hidden
+    UnhideBox.Visible = false
     UnhideBox.Parent = ScreenGui
 
     local BoxCorner = Instance.new("UICorner", UnhideBox)
