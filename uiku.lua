@@ -49,7 +49,7 @@ function Framework:CreateWindow(Settings)
     local Main = Instance.new("Frame")
     Main.Size = UDim2.new(0, 500, 0, 330) -- ukuran fix
     Main.AnchorPoint = Vector2.new(0.5, 0.5) -- acuan tengah
-    Main.Position = UDim2.new(0.5, 0, 0.5, -40) -- geser 40px ke atas
+    Main.Position = UDim2.new(0.5, 0, 0.5) -- geser 40px ke atas
     Main.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     Main.BorderSizePixel = 0
     Main.Parent = ScreenGui
@@ -270,7 +270,6 @@ function Framework:CreateWindow(Settings)
         local TabContent = Instance.new("ScrollingFrame")
         TabContent.Size = UDim2.new(1, -20, 1, -110) -- dikurangi biar ada space bawah
         TabContent.Position = UDim2.new(0, 10, 0, 95) -- tetap sama
-
         TabContent.BackgroundTransparency = 1
         TabContent.ScrollBarThickness = 6 -- bisa 0 kalau mau tanpa bar
         TabContent.ClipsDescendants = true
