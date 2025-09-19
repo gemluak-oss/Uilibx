@@ -47,40 +47,38 @@ function Framework:CreateWindow(Settings)
 
         -- Main window responsif otomatis
     local Main = Instance.new("Frame")
-    Main.AnchorPoint = Vector2.new(0.5, 0.5) -- biar selalu center
+    Main.AnchorPoint = Vector2.new(0.5, 0.5)
     Main.Position = UDim2.new(0.5, 0, 0.5, 0)
     Main.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     Main.BorderSizePixel = 0
     Main.Parent = ScreenGui
 
-    -- cek resolusi layar
-    local viewport = workspace.CurrentCamera.ViewportSize
-    if viewport.X < 800 then
-        -- Mobile (layar kecil)
-        Main.Size = UDim2.new(0.9, 0, 0.9, 0) -- 90% layar
-    else
-        -- PC (layar besar)
-        Main.Size = UDim2.new(0.7, 0, 0.7, 0) -- 70% layar
-    end
-
-    -- biar tetap proporsional (16:9)
+    -- constraint opsional
     local Aspect = Instance.new("UIAspectRatioConstraint")
     Aspect.AspectRatio = 16/9
     Aspect.Parent = Main
 
+    -- cek resolusi layar
+    local function adjustSize()
+        local viewport = workspace.CurrentCamera.ViewportSize
+        if viewport.X < 800 then
+            -- 📱 Mobile: lebih besar
+            Main.Size = UDim2.new(0.95, 0, 0.95, 0) -- hampir full layar
+            Aspect.AspectRatio = 0 -- matikan ratio
+        else
+            -- 💻 PC: elegan dengan rasio
+            Main.Size = UDim2.new(0.7, 0, 0.7, 0)
+            Aspect.AspectRatio = 16/9
+        end
+    end
+
+    adjustSize()
+
+    workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(adjustSize)
+
     local MainCorner = Instance.new("UICorner")
     MainCorner.CornerRadius = UDim.new(0, 12)
     MainCorner.Parent = Main
-
-    -- auto-resize kalau user resize layar
-    workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
-        local newViewport = workspace.CurrentCamera.ViewportSize
-        if newViewport.X < 800 then
-            Main.Size = UDim2.new(0.9, 0, 0.9, 0)
-        else
-            Main.Size = UDim2.new(0.7, 0, 0.7, 0)
-        end
-    end)
 
 
     -- Header bar
