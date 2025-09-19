@@ -227,6 +227,75 @@ function Framework:CreateWindow(Settings)
             end)
         end
 
+
+        -- API: Slider
+        function Tab:CreateSlider(Text, Min, Max, Default, Callback)
+            local SliderFrame = Instance.new("Frame")
+            SliderFrame.Size = UDim2.new(1, 0, 0, 50)
+            SliderFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            SliderFrame.Parent = TabContent
+
+            local Corner = Instance.new("UICorner", SliderFrame)
+            Corner.CornerRadius = UDim.new(0, 6)
+
+            local Label = Instance.new("TextLabel")
+            Label.Size = UDim2.new(1, 0, 0, 20)
+            Label.Position = UDim2.new(0, 10, 0, 0)
+            Label.BackgroundTransparency = 1
+            Label.Text = Text .. " ("..tostring(Default)..")"
+            Label.Font = Enum.Font.Gotham
+            Label.TextSize = 14
+            Label.TextColor3 = Color3.fromRGB(255, 255, 255)
+            Label.TextXAlignment = Enum.TextXAlignment.Left
+            Label.Parent = SliderFrame
+
+            local Bar = Instance.new("Frame")
+            Bar.Size = UDim2.new(1, -20, 0, 6)
+            Bar.Position = UDim2.new(0, 10, 0, 30)
+            Bar.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+            Bar.Parent = SliderFrame
+
+            local BarCorner = Instance.new("UICorner", Bar)
+            BarCorner.CornerRadius = UDim.new(0, 3)
+
+            local Fill = Instance.new("Frame")
+            Fill.Size = UDim2.new((Default - Min) / (Max - Min), 0, 1, 0)
+            Fill.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+            Fill.Parent = Bar
+
+            local FillCorner = Instance.new("UICorner", Fill)
+            FillCorner.CornerRadius = UDim.new(0, 3)
+
+            local dragging = false
+            local value = Default
+
+            local function update(input)
+                local pos = math.clamp((input.Position.X - Bar.AbsolutePosition.X) / Bar.AbsoluteSize.X, 0, 1)
+                value = math.floor(Min + (Max - Min) * pos)
+                Fill.Size = UDim2.new(pos, 0, 1, 0)
+                Label.Text = Text .. " ("..tostring(value)..")"
+                if Callback then Callback(value) end
+            end
+
+            Bar.InputBegan:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    dragging = true
+                    update(input)
+                end
+            end)
+            Bar.InputEnded:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    dragging = false
+                end
+            end)
+            UserInputService.InputChanged:Connect(function(input)
+                if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+                    update(input)
+                end
+            end)
+        end
+
+        
         return Tab
     end
 
