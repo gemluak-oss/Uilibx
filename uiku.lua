@@ -268,13 +268,23 @@ function Framework:CreateWindow(Settings)
 
         -- Konten tab
         local TabContent = Instance.new("ScrollingFrame")
-        TabContent.Size = UDim2.new(1, -20, 1, -110) -- dikurangi biar ada space bawah
-        TabContent.Position = UDim2.new(0, 10, 0, 95) -- tetap sama
+        TabContent.Size = UDim2.new(1, -20, 1, -95)
+        TabContent.Position = UDim2.new(0, 10, 0, 95)
         TabContent.BackgroundTransparency = 1
-        TabContent.ScrollBarThickness = 6 -- bisa 0 kalau mau tanpa bar
+        TabContent.ScrollBarThickness = 6
         TabContent.ClipsDescendants = true
         TabContent.Visible = false
         TabContent.Parent = Main
+
+        -- biar bisa scroll
+        TabContent.ScrollingDirection = Enum.ScrollingDirection.Y
+
+        -- Padding biar isi tab tidak nempel ke bawah
+        local ContentPadding = Instance.new("UIPadding")
+        ContentPadding.PaddingBottom = UDim.new(0, 10) -- jarak bawah
+        ContentPadding.PaddingTop = UDim.new(0, 5)     -- jarak atas
+        ContentPadding.Parent = TabContent
+
 
         -- biar bisa scroll pakai mouse wheel langsung di area konten
         TabContent.ScrollingDirection = Enum.ScrollingDirection.Y -- hanya vertical
