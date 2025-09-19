@@ -268,8 +268,9 @@ function Framework:CreateWindow(Settings)
 
         -- Konten tab
         local TabContent = Instance.new("ScrollingFrame")
-        TabContent.Size = UDim2.new(1, -20, 1, -90)
-        TabContent.Position = UDim2.new(0, 10, 0, 95)
+        TabContent.Size = UDim2.new(1, -20, 1, -110) -- dikurangi biar ada space bawah
+        TabContent.Position = UDim2.new(0, 10, 0, 95) -- tetap sama
+
         TabContent.BackgroundTransparency = 1
         TabContent.ScrollBarThickness = 6 -- bisa 0 kalau mau tanpa bar
         TabContent.ClipsDescendants = true
