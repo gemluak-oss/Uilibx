@@ -45,30 +45,19 @@ function Framework:CreateWindow(Settings)
     ScreenGui.Name = Settings.Name or "RuinzUI"
     ScreenGui.Parent = game:GetService("CoreGui")
 
-        -- Main window responsif otomatis
+    -- Main window selalu kotak (persegi)
     local Main = Instance.new("Frame")
-    Main.AnchorPoint = Vector2.new(0.5, 0.5)
+    Main.Size = UDim2.new(0.7, 0, 0.7, 0) -- 70% dari layar, panjang = lebar
     Main.Position = UDim2.new(0.5, 0, 0.5, 0)
+    Main.AnchorPoint = Vector2.new(0.5, 0.5)
     Main.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     Main.BorderSizePixel = 0
     Main.Parent = ScreenGui
 
-    -- ⚡ Cek resolusi layar dan sesuaikan
-    local function adjustSize()
-        local viewport = workspace.CurrentCamera.ViewportSize
-        if viewport.X < 800 then
-            -- 📱 Mobile: kotak
-            Main.Size = UDim2.new(0.7, 0, 0.9, 0) -- 85% x 85% biar full tapi tetap kotak
-        else
-            -- 💻 PC: kotak juga
-            Main.Size = UDim2.new(0.6, 0, 0.6, 0) -- 60% x 60%
-        end
-        Main.Position = UDim2.new(0.5, 0, 0.5, 0)
-        Main.AnchorPoint = Vector2.new(0.5, 0.5)
-    end
-
-    adjustSize()
-    workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(adjustSize)
+    -- Constraint biar tetap kotak
+    local Aspect = Instance.new("UIAspectRatioConstraint")
+    Aspect.AspectRatio = 1 -- ✅ 1:1 = kotak
+    Aspect.Parent = Main
 
     -- Biar rounded
     local MainCorner = Instance.new("UICorner")
