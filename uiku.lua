@@ -268,16 +268,14 @@ function Framework:CreateWindow(Settings)
 
         -- Konten tab
         local TabContent = Instance.new("ScrollingFrame")
-        TabContent.Size = UDim2.new(1, -20, 1, -95)
-        TabContent.Position = UDim2.new(0, 10, 0, 95)
+        TabContent.Size = UDim2.new(1, -20, 1, -120) -- kurangi tinggi lebih banyak
+        TabContent.Position = UDim2.new(0, 10, 0, 95) -- tetap mulai di bawah tab + separator
+
         TabContent.BackgroundTransparency = 1
         TabContent.ScrollBarThickness = 6
         TabContent.ClipsDescendants = true
         TabContent.Visible = false
         TabContent.Parent = Main
-
-        -- biar bisa scroll
-        TabContent.ScrollingDirection = Enum.ScrollingDirection.Y
 
         -- Padding biar isi tab tidak nempel ke bawah
         local ContentPadding = Instance.new("UIPadding")
