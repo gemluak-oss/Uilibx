@@ -199,6 +199,9 @@ function Framework:CreateWindow(Settings)
         TabContent.Visible = false
         TabContent.Parent = Main
 
+        -- biar bisa scroll pakai mouse wheel langsung di area konten
+        TabContent.ScrollingDirection = Enum.ScrollingDirection.Y -- hanya vertical
+        TabContent.CanvasSize = UDim2.new(0,0,0,0)
         -- biar bisa drag scroll di mobile
         TabContent.ScrollingDirection = Enum.ScrollingDirection.Y -- scroll vertikal
         TabContent.CanvasSize = UDim2.new(0,0,0,0)
