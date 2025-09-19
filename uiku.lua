@@ -102,6 +102,7 @@ function Framework:CreateWindow(Settings)
     -- 📑 Tab system
     local TabButtons = Instance.new("Frame")
     TabButtons.Size = UDim2.new(1, 0, 0, 30)
+    TabButtons.Position = UDim2.new(0, 0, 0, 30) -- geser ke bawah 30px
     TabButtons.BackgroundTransparency = 1
     TabButtons.Parent = Main
     local Layout = Instance.new("UIListLayout")
