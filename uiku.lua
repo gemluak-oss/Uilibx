@@ -45,7 +45,7 @@ function Framework:CreateWindow(Settings)
     ScreenGui.Name = Settings.Name or "RuinzUI"
     ScreenGui.Parent = game:GetService("CoreGui")
 
-        -- Main window gaya Rayfield (PC & Mobile support)
+    -- Main window gaya Rayfield (PC & Mobile support)
     local Main = Instance.new("Frame")
     Main.Size = UDim2.new(0, 500, 0, 350) -- ukuran fix
     Main.AnchorPoint = Vector2.new(0.5, 0.5) -- pusat frame
@@ -235,6 +235,16 @@ function Framework:CreateWindow(Settings)
     TabLayout.Padding = UDim.new(0, 8)
     TabLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
+    local TabContent = Instance.new("ScrollingFrame")
+    TabContent.Size = UDim2.new(1, -20, 1, -110)
+    TabContent.Position = UDim2.new(0, 10, 0, 95) -- turun dikit setelah separator
+    TabContent.BackgroundTransparency = 1
+    TabContent.ScrollBarThickness = 6
+    TabContent.ClipsDescendants = true
+    TabContent.Visible = false
+    TabContent.Parent = Main
+
+
     -- auto resize canvas
     TabLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
         TabButtons.CanvasSize = UDim2.new(0, TabLayout.AbsoluteContentSize.X, 0, 0)
@@ -262,18 +272,10 @@ function Framework:CreateWindow(Settings)
         local BtnCorner = Instance.new("UICorner", TabButton)
         BtnCorner.CornerRadius = UDim.new(0, 8)
 
-        -- Separator di bawah tab bar
-        local Separator = Instance.new("Frame")
-        Separator.Size = UDim2.new(1, -20, 0, 1)
-        Separator.Position = UDim2.new(0, 10, 0, 85) -- posisinya setelah tab bar
-        Separator.BackgroundColor3 = Color3.fromRGB(120, 120, 120) -- abu2 gelap
-        Separator.BorderSizePixel = 0
-        Separator.Parent = Main
-
         -- Konten tab
         local TabContent = Instance.new("ScrollingFrame")
-        TabContent.Size = UDim2.new(1, -20, 1, -110)
-        TabContent.Position = UDim2.new(0, 10, 0, 95)
+        TabContent.Size = UDim2.new(1, -20, 1, -90)
+        TabContent.Position = UDim2.new(0, 10, 0, 85)
         TabContent.BackgroundTransparency = 1
         TabContent.ScrollBarThickness = 6 -- bisa 0 kalau mau tanpa bar
         TabContent.ClipsDescendants = true
