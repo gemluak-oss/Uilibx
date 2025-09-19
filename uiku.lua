@@ -12,6 +12,7 @@ local function ShowIntro()
     Frame.Position = UDim2.new(0.5, -150, 0.5, -50)
     Frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
     Frame.Parent = IntroGui
+    
 
     local Label = Instance.new("TextLabel")
     Label.Size = UDim2.new(1, 0, 1, 0)
@@ -51,6 +52,9 @@ function Framework:CreateWindow(Settings)
     Main.Position = UDim2.new(0.5, -250, 0.5, -175)
     Main.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
     Main.Parent = ScreenGui
+    Main.Active = true
+    Main.Draggable = true
+
 
     local Title = Instance.new("TextLabel")
     Title.Size = UDim2.new(1, 0, 0, 30)
