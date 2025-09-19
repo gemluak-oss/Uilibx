@@ -48,16 +48,11 @@ function Framework:CreateWindow(Settings)
     -- Main window gaya Rayfield (PC & Mobile support)
     local Main = Instance.new("Frame")
     Main.Size = UDim2.new(0, 500, 0, 330) -- ukuran fix
-    Main.AnchorPoint = Vector2.new(0.5, 0.45) -- pusat frame
-    Main.Position = UDim2.new(0.5, 0, 0.5, 0) -- selalu di tengah layar
+    Main.AnchorPoint = Vector2.new(0.5, 0.5) -- acuan tengah
+    Main.Position = UDim2.new(0.5, 0, 0.5, -40) -- geser 40px ke atas
     Main.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     Main.BorderSizePixel = 0
     Main.Parent = ScreenGui
-
-    local MainCorner = Instance.new("UICorner")
-    MainCorner.CornerRadius = UDim.new(0, 12)
-    MainCorner.Parent = Main
-
 
     -- Header bar
     local Header = Instance.new("Frame")
