@@ -109,51 +109,55 @@ function Framework:CreateWindow(Settings)
         end)
     end
 
-            --- Tab container
-        local TabButtons = Instance.new("Frame")
-        TabButtons.Size = UDim2.new(1, -20, 0, 35)
-        TabButtons.Position = UDim2.new(0, 10, 0, 45)
-        TabButtons.BackgroundTransparency = 1
-        TabButtons.ClipsDescendants = true -- biar tombol nggak tembus keluar
-        TabButtons.Parent = Main
+    -- Tab container (tetap)
+    local TabButtons = Instance.new("Frame")
+    TabButtons.Size = UDim2.new(1, -20, 0, 35)
+    TabButtons.Position = UDim2.new(0, 10, 0, 45)
+    TabButtons.BackgroundTransparency = 1
+    TabButtons.ClipsDescendants = true -- potong tombol yang keluar
+    TabButtons.Parent = Main
 
-        -- Inner container buat semua tombol
-        local TabHolder = Instance.new("Frame")
-        TabHolder.Size = UDim2.new(0, 0, 1, 0)
-        TabHolder.BackgroundTransparency = 1
-        TabHolder.Parent = TabButtons
+    -- Holder untuk semua tombol tab
+    local TabHolder = Instance.new("Frame")
+    TabHolder.Size = UDim2.new(0, 0, 1, 0)
+    TabHolder.Position = UDim2.new(0, 0, 0, 0)
+    TabHolder.BackgroundTransparency = 1
+    TabHolder.Parent = TabButtons
 
-        local Layout = Instance.new("UIListLayout", TabHolder)
-        Layout.FillDirection = Enum.FillDirection.Horizontal
-        Layout.Padding = UDim.new(0, 8)
-        Layout.SortOrder = Enum.SortOrder.LayoutOrder
+    local TabLayout = Instance.new("UIListLayout", TabHolder)
+    TabLayout.FillDirection = Enum.FillDirection.Horizontal
+    TabLayout.Padding = UDim.new(0, 8)
+    TabLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
-        -- Drag system untuk geser TabHolder
-        local dragging = false
-        local dragStart, startPos
+    -- Drag horizontal untuk TabHolder
+    local dragging = false
+    local dragStart, startPos
 
-        TabButtons.InputBegan:Connect(function(input)
-            if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                dragging = true
-                dragStart = input.Position
-                startPos = TabHolder.Position
-                input.Changed:Connect(function()
-                    if input.UserInputState == Enum.UserInputState.End then
-                        dragging = false
-                    end
-                end)
-            end
-        end)
+    TabButtons.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = true
+            dragStart = input.Position
+            startPos = TabHolder.Position
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
+        end
+    end)
 
-        UserInputService.InputChanged:Connect(function(input)
-            if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
-                local delta = input.Position - dragStart
-                local newX = startPos.X.Offset + delta.X
-                TabHolder.Position = UDim2.new(0, newX, 0, 0)
-            end
-        end)
+    UserInputService.InputChanged:Connect(function(input)
+        if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+            local delta = input.Position - dragStart
+            local newX = startPos.X.Offset + delta.X
 
+            -- batas geser (biar nggak kelewatan)
+            local maxOffset = 0
+            local minOffset = math.min(0, TabButtons.AbsoluteSize.X - TabHolder.AbsoluteSize.X)
 
+            TabHolder.Position = UDim2.new(0, math.clamp(newX, minOffset, maxOffset), 0, 0)
+        end
+    end)
 
 
     -- Container untuk tab contents
@@ -171,7 +175,7 @@ function Framework:CreateWindow(Settings)
         TabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
         TabButton.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
         TabButton.AutoButtonColor = false
-        TabButton.Parent = TabButtons
+        TabButton.Parent = TabHolder
 
         local BtnCorner = Instance.new("UICorner", TabButton)
         BtnCorner.CornerRadius = UDim.new(0, 8)
