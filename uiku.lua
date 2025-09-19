@@ -58,7 +58,7 @@ function Framework:CreateWindow(Settings)
         local viewport = workspace.CurrentCamera.ViewportSize
         if viewport.X < 800 then
             -- 📱 Mobile: kotak
-            Main.Size = UDim2.new(0.85, 0, 0.85, 0) -- 85% x 85% biar full tapi tetap kotak
+            Main.Size = UDim2.new(0.7, 0, 0.9, 0) -- 85% x 85% biar full tapi tetap kotak
         else
             -- 💻 PC: kotak juga
             Main.Size = UDim2.new(0.6, 0, 0.6, 0) -- 60% x 60%
