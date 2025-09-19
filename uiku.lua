@@ -15,7 +15,7 @@ local function ShowIntro()
 
     local Label = Instance.new("TextLabel")
     Label.Size = UDim2.new(1, 0, 1, 0)
-    Label.Text = "Loading MyFramework..."
+    Label.Text = "RUINZ-UI"
     Label.Font = Enum.Font.GothamBold
     Label.TextSize = 20
     Label.TextColor3 = Color3.fromRGB(255,255,255)
