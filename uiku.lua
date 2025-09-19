@@ -195,7 +195,7 @@ function Framework:CreateWindow(Settings)
         TabContent.Position = UDim2.new(0, 10, 0, 85)
         TabContent.BackgroundTransparency = 1
         TabContent.ScrollBarThickness = 4 -- tipis aja biar rapi
-        TabContent.Visible = false
+        TabContent.Visible = true
         TabContent.Parent = Main
         TabContent.CanvasSize = UDim2.new(0,0,0,0) -- auto-update nanti
 
