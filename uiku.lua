@@ -57,12 +57,14 @@ function Framework:CreateWindow(Settings)
     local function adjustSize()
         local viewport = workspace.CurrentCamera.ViewportSize
         if viewport.X < 800 then
-            -- 📱 Mobile (portrait): ambil hampir full layar
-            Main.Size = UDim2.new(0.7, 0, 0.7, 0)
+            -- 📱 Mobile: kotak
+            Main.Size = UDim2.new(0.85, 0, 0.85, 0) -- 85% x 85% biar full tapi tetap kotak
         else
-            -- 💻 PC: ukuran lebih elegan (ga full)
-            Main.Size = UDim2.new(0.5, 0, 0.5, 0)
+            -- 💻 PC: kotak juga
+            Main.Size = UDim2.new(0.6, 0, 0.6, 0) -- 60% x 60%
         end
+        Main.Position = UDim2.new(0.5, 0, 0.5, 0)
+        Main.AnchorPoint = Vector2.new(0.5, 0.5)
     end
 
     adjustSize()
