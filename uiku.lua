@@ -2,7 +2,41 @@ local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 local Framework = {}
 
+-- 🎬 Intro Custom
+local function ShowIntro()
+    local IntroGui = Instance.new("ScreenGui")
+    IntroGui.Name = "IntroGui"
+    IntroGui.Parent = game:GetService("CoreGui")
+
+    local Frame = Instance.new("Frame")
+    Frame.Size = UDim2.new(0, 300, 0, 100)
+    Frame.Position = UDim2.new(0.5, -150, 0.5, -50)
+    Frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    Frame.Parent = IntroGui
+
+    local Label = Instance.new("TextLabel")
+    Label.Size = UDim2.new(1, 0, 1, 0)
+    Label.Text = "RUINZ-UI"
+    Label.Font = Enum.Font.GothamBold
+    Label.TextSize = 20
+    Label.TextColor3 = Color3.fromRGB(255,255,255)
+    Label.BackgroundTransparency = 1
+    Label.Parent = Frame
+
+    Frame.BackgroundTransparency = 1
+    local tweenIn = TweenService:Create(Frame, TweenInfo.new(0.8), {BackgroundTransparency = 0})
+    tweenIn:Play()
+
+    task.wait(2)
+
+    local tweenOut = TweenService:Create(Frame, TweenInfo.new(0.8), {BackgroundTransparency = 1})
+    tweenOut:Play()
+    tweenOut.Completed:Wait()
+    IntroGui:Destroy()
+end
+
 -- 🏠 Create Window
+ShowIntro()
 function Framework:CreateWindow(Settings)
     local Window = {}
     local ScreenGui = Instance.new("ScreenGui")
