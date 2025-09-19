@@ -89,22 +89,40 @@ function Framework:CreateWindow(Settings)
     local BtnCorner = Instance.new("UICorner", HideButton)
     BtnCorner.CornerRadius = UDim.new(0, 6)
 
-    -- 🔲 Tombol Unhide (atas tengah, oval abu-abu transparan)
+    -- 🔲 Tombol Unhide (atas tengah, outline RGB)
     local UnhideBox = Instance.new("TextButton")
-    UnhideBox.Size = UDim2.new(0, 120, 0, 35) -- persegi panjang kecil
+    UnhideBox.Size = UDim2.new(0, 140, 0, 35)
     UnhideBox.AnchorPoint = Vector2.new(0.5, 0)
-    UnhideBox.Position = UDim2.new(0.5, 0, 0, 10) -- atas tengah
+    UnhideBox.Position = UDim2.new(0.5, 0, 0, 10)
     UnhideBox.Text = "RUINZHUB"
     UnhideBox.Font = Enum.Font.GothamBold
-    UnhideBox.TextSize = 14
+    UnhideBox.TextSize = 16
     UnhideBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-    UnhideBox.BackgroundColor3 = Color3.fromRGB(100, 100, 100) -- abu-abu
-    UnhideBox.BackgroundTransparency = 0.3 -- transparan
+    UnhideBox.BackgroundTransparency = 1 -- transparan
     UnhideBox.Visible = false
     UnhideBox.Parent = ScreenGui
 
+    -- Outline RGB
+    local Outline = Instance.new("UIStroke")
+    Outline.Thickness = 2
+    Outline.Parent = UnhideBox
+
+    -- Oval shape
     local BoxCorner = Instance.new("UICorner", UnhideBox)
-    BoxCorner.CornerRadius = UDim.new(1, 0) -- bikin oval penuh
+    BoxCorner.CornerRadius = UDim.new(1, 0)
+
+    -- 🔄 Animasi RGB Outline
+    task.spawn(function()
+        local t = 0
+        while true do
+            t = t + 1
+            local r = math.sin(t/50)*127 + 128
+            local g = math.sin(t/50 + 2)*127 + 128
+            local b = math.sin(t/50 + 4)*127 + 128
+            Outline.Color = Color3.fromRGB(r, g, b)
+            task.wait(0.03)
+        end
+    end)
 
 
     -- 🔄 Logic hide/unhide
