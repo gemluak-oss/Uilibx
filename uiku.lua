@@ -37,9 +37,7 @@ local function ShowIntro()
 end
 
 -- 🏠 Create Window
-
 function Framework:CreateWindow(Settings)
-    
     local Window = {}
     local ScreenGui = Instance.new("ScreenGui")
     ScreenGui.Name = Settings.Name or "RuinzUI"
@@ -109,15 +107,14 @@ function Framework:CreateWindow(Settings)
         end)
     end
 
-    -- Tab container (tetap)
+    -- 📑 Tab bar (drag manual)
     local TabButtons = Instance.new("Frame")
     TabButtons.Size = UDim2.new(1, -20, 0, 35)
     TabButtons.Position = UDim2.new(0, 10, 0, 45)
     TabButtons.BackgroundTransparency = 1
-    TabButtons.ClipsDescendants = true -- potong tombol yang keluar
+    TabButtons.ClipsDescendants = true
     TabButtons.Parent = Main
 
-    -- Holder untuk semua tombol tab
     local TabHolder = Instance.new("Frame")
     TabHolder.Size = UDim2.new(0, 0, 1, 0)
     TabHolder.Position = UDim2.new(0, 0, 0, 0)
@@ -129,36 +126,36 @@ function Framework:CreateWindow(Settings)
     TabLayout.Padding = UDim.new(0, 8)
     TabLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
-    -- Drag horizontal untuk TabHolder
-    local dragging = false
-    local dragStart, startPos
+    -- Drag system
+    do
+        local dragging = false
+        local dragStart, startPos
 
-    TabButtons.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            dragging = true
-            dragStart = input.Position
-            startPos = TabHolder.Position
-            input.Changed:Connect(function()
-                if input.UserInputState == Enum.UserInputState.End then
-                    dragging = false
-                end
-            end)
-        end
-    end)
+        TabButtons.InputBegan:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                dragging = true
+                dragStart = input.Position
+                startPos = TabHolder.Position
+                input.Changed:Connect(function()
+                    if input.UserInputState == Enum.UserInputState.End then
+                        dragging = false
+                    end
+                end)
+            end
+        end)
 
-    UserInputService.InputChanged:Connect(function(input)
-        if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
-            local delta = input.Position - dragStart
-            local newX = startPos.X.Offset + delta.X
+        UserInputService.InputChanged:Connect(function(input)
+            if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+                local delta = input.Position - dragStart
+                local newX = startPos.X.Offset + delta.X
 
-            -- batas geser (biar nggak kelewatan)
-            local maxOffset = 0
-            local minOffset = math.min(0, TabButtons.AbsoluteSize.X - TabHolder.AbsoluteSize.X)
+                local maxOffset = 0
+                local minOffset = math.min(0, TabButtons.AbsoluteSize.X - TabHolder.AbsoluteSize.X)
 
-            TabHolder.Position = UDim2.new(0, math.clamp(newX, minOffset, maxOffset), 0, 0)
-        end
-    end)
-
+                TabHolder.Position = UDim2.new(0, math.clamp(newX, minOffset, maxOffset), 0, 0)
+            end
+        end)
+    end
 
     -- Container untuk tab contents
     local Tabs = {}
@@ -197,7 +194,7 @@ function Framework:CreateWindow(Settings)
         Tabs[TabName] = TabContent
 
         -- kalau ini tab pertama, langsung aktif
-        if #TabButtons:GetChildren() == 2 then
+        if #TabHolder:GetChildren() == 2 then -- 1 layout + 1 tab button
             TabContent.Visible = true
         end
 
@@ -208,7 +205,6 @@ function Framework:CreateWindow(Settings)
             end
             TabContent.Visible = true
         end)
-
 
         -- API: Button
         function Tab:CreateButton(Text, Callback)
@@ -342,8 +338,6 @@ function Framework:CreateWindow(Settings)
                 end
             end)
         end
-
-
 
         return Tab
     end
