@@ -228,6 +228,15 @@ function Framework:CreateWindow(Settings)
     TabButtons.CanvasSize = UDim2.new(0,0,0,0)
     TabButtons.Parent = Main
 
+    -- Garis pemisah antara tab dan konten
+    local Separator = Instance.new("Frame")
+    Separator.Size = UDim2.new(1, -20, 0, 1) -- lebar penuh, tinggi 1px
+    Separator.Position = UDim2.new(0, 10, 0, 80) -- pas di bawah TabButtons
+    Separator.BackgroundColor3 = Color3.fromRGB(120, 120, 120) -- silver gelap
+    Separator.BorderSizePixel = 0
+    Separator.Parent = Main
+
+
     local TabLayout = Instance.new("UIListLayout", TabButtons)
     TabLayout.FillDirection = Enum.FillDirection.Horizontal
     TabLayout.Padding = UDim.new(0, 8)
