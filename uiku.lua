@@ -58,7 +58,7 @@ function Framework:CreateWindow(Settings)
         local viewport = workspace.CurrentCamera.ViewportSize
         if viewport.X < 800 then
             -- 📱 Mobile (portrait): ambil hampir full layar
-            Main.Size = UDim2.new(0.9, 0, 0.7, 0)
+            Main.Size = UDim2.new(0.7, 0, 0.7, 0)
         else
             -- 💻 PC: ukuran lebih elegan (ga full)
             Main.Size = UDim2.new(0.5, 0, 0.5, 0)
