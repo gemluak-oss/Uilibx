@@ -194,12 +194,6 @@ function Framework:CreateWindow(Settings)
             TabContent.Visible = true
         end
 
-
-        -- kalau ini tab pertama, langsung aktif
-        if #TabButtons:GetChildren() == 2 then -- 1 layout + 1 tab button
-            TabContent.Visible = true
-        end
-
         -- Klik tab → tampilkan kontennya
         TabButton.MouseButton1Click:Connect(function()
             for _, frame in pairs(Tabs) do
