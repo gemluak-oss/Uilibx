@@ -38,7 +38,7 @@ end
 -- 🏠 Create Window
 
 function Framework:CreateWindow(Settings)
-    ShowIntro()
+    
     local Window = {}
     local ScreenGui = Instance.new("ScreenGui")
     ScreenGui.Name = Settings.Name or "RuinzUI"
@@ -227,7 +227,6 @@ function Framework:CreateWindow(Settings)
             end)
         end
 
-
         -- API: Slider
         function Tab:CreateSlider(Text, Min, Max, Default, Callback)
             local SliderFrame = Instance.new("Frame")
@@ -283,11 +282,13 @@ function Framework:CreateWindow(Settings)
                     update(input)
                 end
             end)
+
             Bar.InputEnded:Connect(function(input)
                 if input.UserInputType == Enum.UserInputType.MouseButton1 then
                     dragging = false
                 end
             end)
+
             UserInputService.InputChanged:Connect(function(input)
                 if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
                     update(input)
@@ -295,7 +296,8 @@ function Framework:CreateWindow(Settings)
             end)
         end
 
-        
+
+
         return Tab
     end
 
