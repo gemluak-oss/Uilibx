@@ -45,13 +45,19 @@ function Framework:CreateWindow(Settings)
     ScreenGui.Name = Settings.Name or "RuinzUI"
     ScreenGui.Parent = game:GetService("CoreGui")
 
-    -- Main window
+    -- Main window responsif
     local Main = Instance.new("Frame")
-    Main.Size = UDim2.new(0, 550, 0, 400)
-    Main.Position = UDim2.new(0.5, -275, 0.5, -200)
+    Main.Size = UDim2.new(0.7, 0, 0.7, 0) -- 70% dari layar
+    Main.Position = UDim2.new(0.5, 0, 0.5, 0) -- tengah layar
+    Main.AnchorPoint = Vector2.new(0.5, 0.5) -- biar center bener
     Main.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     Main.BorderSizePixel = 0
     Main.Parent = ScreenGui
+
+    -- Biar tetap proporsional (16:9)
+    local Aspect = Instance.new("UIAspectRatioConstraint")
+    Aspect.AspectRatio = 16/9
+    Aspect.Parent = Main
 
     local MainCorner = Instance.new("UICorner")
     MainCorner.CornerRadius = UDim.new(0, 12)
@@ -227,15 +233,6 @@ function Framework:CreateWindow(Settings)
     TabButtons.ScrollingDirection = Enum.ScrollingDirection.X
     TabButtons.CanvasSize = UDim2.new(0,0,0,0)
     TabButtons.Parent = Main
-
-    -- Garis pemisah antara tab dan konten
-    local Separator = Instance.new("Frame")
-    Separator.Size = UDim2.new(1, -20, 0, 1) -- lebar penuh, tinggi 1px
-    Separator.Position = UDim2.new(0, 10, 0, TabButtons.Position.Y.Offset + TabButtons.Size.Y.Offset + 10)
-    Separator.BackgroundColor3 = Color3.fromRGB(120, 120, 120) -- silver gelap
-    Separator.BorderSizePixel = 0
-    Separator.Parent = Main
-
 
     local TabLayout = Instance.new("UIListLayout", TabButtons)
     TabLayout.FillDirection = Enum.FillDirection.Horizontal
