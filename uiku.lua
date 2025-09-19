@@ -158,10 +158,9 @@ function Framework:CreateWindow(Settings)
         Tabs[TabName] = TabContent
 
         -- kalau ini tab pertama, langsung aktif
-        if not next(Tabs) or (#TabButtons:GetChildren() == 2) then -- 1 UIListLayout + 1 tombol tab
+        if #TabButtons:GetChildren() == 2 then
             TabContent.Visible = true
         end
-
 
         -- Klik tab → tampilkan kontennya
         TabButton.MouseButton1Click:Connect(function()
