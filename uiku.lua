@@ -45,26 +45,24 @@ function Framework:CreateWindow(Settings)
     ScreenGui.Name = Settings.Name or "RuinzUI"
     ScreenGui.Parent = game:GetService("CoreGui")
 
-    -- Main window selalu kotak (persegi)
+    -- Main window (selalu kotak)
     local Main = Instance.new("Frame")
-    Main.Size = UDim2.new(0.7, 0, 0.7, 0) -- 70% dari layar, panjang = lebar
+    Main.Size = UDim2.new(0.7, 0, 0, 0) -- cuma atur skala lebar
     Main.Position = UDim2.new(0.5, 0, 0.5, 0)
     Main.AnchorPoint = Vector2.new(0.5, 0.5)
     Main.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     Main.BorderSizePixel = 0
     Main.Parent = ScreenGui
 
-    -- Constraint biar tetap kotak
+    -- Constraint biar tinggi = lebar (kotak)
     local Aspect = Instance.new("UIAspectRatioConstraint")
-    Aspect.AspectRatio = 1 -- ✅ 1:1 = kotak
+    Aspect.AspectRatio = 1 -- 1:1 kotak
     Aspect.Parent = Main
 
     -- Biar rounded
     local MainCorner = Instance.new("UICorner")
     MainCorner.CornerRadius = UDim.new(0, 12)
     MainCorner.Parent = Main
-
-
 
     -- Header bar
     local Header = Instance.new("Frame")
