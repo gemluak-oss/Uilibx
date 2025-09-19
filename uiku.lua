@@ -114,6 +114,46 @@ function Framework:CreateWindow(Settings)
     Outline.Transparency = 0.2 -- sedikit transparan
     Outline.Parent = UnhideBox
 
+     -- ⚡ Biar UnhideBox bisa digeser di PC & Mobile
+    do
+        local dragging, dragInput, dragStart, startPos
+        local function update(input)
+            local delta = input.Position - dragStart
+            UnhideBox.Position = UDim2.new(
+                startPos.X.Scale, startPos.X.Offset + delta.X,
+                startPos.Y.Scale, startPos.Y.Offset + delta.Y
+            )
+        end
+
+        UnhideBox.InputBegan:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 
+            or input.UserInputType == Enum.UserInputType.Touch then
+                dragging = true
+                dragStart = input.Position
+                startPos = UnhideBox.Position
+                input.Changed:Connect(function()
+                    if input.UserInputState == Enum.UserInputState.End then
+                        dragging = false
+                    end
+                end)
+            end
+        end)
+
+        UnhideBox.InputChanged:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseMovement 
+            or input.UserInputType == Enum.UserInputType.Touch then
+                dragInput = input
+            end
+        end)
+
+        UserInputService.InputChanged:Connect(function(input)
+            if input == dragInput and dragging then
+                update(input)
+            end
+        end)
+    end
+
+
     -- 🔄 Animasi RGB Outline
     task.spawn(function()
         local t = 0
@@ -126,8 +166,6 @@ function Framework:CreateWindow(Settings)
             task.wait(0.03)
         end
     end)
-
-
 
     -- 🔄 Logic hide/unhide
     HideButton.MouseButton1Click:Connect(function()
