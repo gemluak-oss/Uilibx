@@ -143,7 +143,7 @@ function Framework:CreateWindow(Settings)
         local dragging = false
         local dragStart, startPos
 
-        TabButtons.InputBegan:Connect(function(input)
+        DragArea.InputBegan:Connect(function(input)
             if input.UserInputType == Enum.UserInputType.MouseButton1 then
                 dragging = true
                 dragStart = input.Position
