@@ -89,7 +89,7 @@ function Framework:CreateWindow(Settings)
     local BtnCorner = Instance.new("UICorner", HideButton)
     BtnCorner.CornerRadius = UDim.new(0, 6)
 
-    -- 🔲 Tombol Unhide (atas tengah, oval outline RGB)
+    -- 🔲 Tombol Unhide (atas tengah, oval outline RGB transparan cyberpunk)
     local UnhideBox = Instance.new("TextButton")
     UnhideBox.Size = UDim2.new(0, 140, 0, 35)
     UnhideBox.AnchorPoint = Vector2.new(0.5, 0)
@@ -97,19 +97,20 @@ function Framework:CreateWindow(Settings)
     UnhideBox.Text = "RUINZHUB"
     UnhideBox.Font = Enum.Font.GothamBold
     UnhideBox.TextSize = 16
-    UnhideBox.TextColor3 = Color3.fromRGB(255, 255, 255) -- putih tebal
-    UnhideBox.BackgroundTransparency = 1 -- transparan, jadi cuma outline
+    UnhideBox.TextColor3 = Color3.fromRGB(255, 255, 255) -- teks putih tebal
+    UnhideBox.BackgroundTransparency = 1 -- background transparan
     UnhideBox.Visible = false
     UnhideBox.Parent = ScreenGui
 
-    -- Bikin oval
+    -- Oval penuh
     local BoxCorner = Instance.new("UICorner", UnhideBox)
     BoxCorner.CornerRadius = UDim.new(1, 0)
 
-    -- Outline RGB di oval
+    -- Outline RGB
     local Outline = Instance.new("UIStroke")
     Outline.Thickness = 2
     Outline.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    Outline.Transparency = 0.3 -- agak transparan
     Outline.Parent = UnhideBox
 
     -- 🔄 Animasi RGB Outline
@@ -124,7 +125,6 @@ function Framework:CreateWindow(Settings)
             task.wait(0.03)
         end
     end)
-
 
 
     -- 🔄 Logic hide/unhide
