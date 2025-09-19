@@ -109,25 +109,50 @@ function Framework:CreateWindow(Settings)
         end)
     end
 
-    -- Tab bar
-    
-    local TabButtons = Instance.new("ScrollingFrame")
-    TabButtons.Size = UDim2.new(1, -20, 0, 35)
-    TabButtons.Position = UDim2.new(0, 10, 0, 45)
-    TabButtons.BackgroundTransparency = 1
-    TabButtons.ScrollBarThickness = 0 -- ❌ hilangin slider abu²
-    TabButtons.ScrollingDirection = Enum.ScrollingDirection.X
-    TabButtons.AutomaticCanvasSize = Enum.AutomaticSize.X
-    TabButtons.CanvasSize = UDim2.new(0,0,0,0)
-    TabButtons.Parent = Main
+            --- Tab container
+        local TabButtons = Instance.new("Frame")
+        TabButtons.Size = UDim2.new(1, -20, 0, 35)
+        TabButtons.Position = UDim2.new(0, 10, 0, 45)
+        TabButtons.BackgroundTransparency = 1
+        TabButtons.ClipsDescendants = true -- biar tombol nggak tembus keluar
+        TabButtons.Parent = Main
 
+        -- Inner container buat semua tombol
+        local TabHolder = Instance.new("Frame")
+        TabHolder.Size = UDim2.new(0, 0, 1, 0)
+        TabHolder.BackgroundTransparency = 1
+        TabHolder.Parent = TabButtons
 
+        local Layout = Instance.new("UIListLayout", TabHolder)
+        Layout.FillDirection = Enum.FillDirection.Horizontal
+        Layout.Padding = UDim.new(0, 8)
+        Layout.SortOrder = Enum.SortOrder.LayoutOrder
 
+        -- Drag system untuk geser TabHolder
+        local dragging = false
+        local dragStart, startPos
 
-    local TabLayout = Instance.new("UIListLayout", TabButtons)
-    TabLayout.FillDirection = Enum.FillDirection.Horizontal
-    TabLayout.Padding = UDim.new(0, 8)
-    TabLayout.SortOrder = Enum.SortOrder.LayoutOrder
+        TabButtons.InputBegan:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                dragging = true
+                dragStart = input.Position
+                startPos = TabHolder.Position
+                input.Changed:Connect(function()
+                    if input.UserInputState == Enum.UserInputState.End then
+                        dragging = false
+                    end
+                end)
+            end
+        end)
+
+        UserInputService.InputChanged:Connect(function(input)
+            if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+                local delta = input.Position - dragStart
+                local newX = startPos.X.Offset + delta.X
+                TabHolder.Position = UDim2.new(0, newX, 0, 0)
+            end
+        end)
+
 
 
 
