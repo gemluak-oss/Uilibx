@@ -2,6 +2,8 @@ local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 local Framework = {}
 local Tabs = {}
+local tabCount = 0
+
 
 -- 🎬 Intro Custom
 local function ShowIntro()
@@ -167,10 +169,9 @@ function Framework:CreateWindow(Settings)
 
         -- biar bisa scroll pakai mouse wheel langsung di area konten
         TabContent.ScrollingDirection = Enum.ScrollingDirection.Y -- hanya vertical
-        TabContent.CanvasSize = UDim2.new(0,0,0,0)
+
         -- biar bisa drag scroll di mobile
         TabContent.ScrollingDirection = Enum.ScrollingDirection.Y -- scroll vertikal
-        TabContent.CanvasSize = UDim2.new(0,0,0,0)
 
         -- layout isi tab
         local ContentLayout = Instance.new("UIListLayout", TabContent)
@@ -188,7 +189,14 @@ function Framework:CreateWindow(Settings)
         Tabs[TabName] = TabContent
 
         -- kalau ini tab pertama, langsung aktif
-        if #TabHolder:GetChildren() == 2 then -- 1 layout + 1 tab button
+        tabCount = tabCount + 1
+        if tabCount == 1 then
+            TabContent.Visible = true
+        end
+
+
+        -- kalau ini tab pertama, langsung aktif
+        if #TabButtons:GetChildren() == 2 then -- 1 layout + 1 tab button
             TabContent.Visible = true
         end
 
