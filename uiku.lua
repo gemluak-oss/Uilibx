@@ -53,32 +53,26 @@ function Framework:CreateWindow(Settings)
     Main.BorderSizePixel = 0
     Main.Parent = ScreenGui
 
-    -- constraint opsional
-    local Aspect = Instance.new("UIAspectRatioConstraint")
-    Aspect.AspectRatio = 16/9
-    Aspect.Parent = Main
-
-    -- cek resolusi layar
+    -- ⚡ Cek resolusi layar dan sesuaikan
     local function adjustSize()
         local viewport = workspace.CurrentCamera.ViewportSize
         if viewport.X < 800 then
-            -- 📱 Mobile: lebih besar
-            Main.Size = UDim2.new(0.95, 0, 0.95, 0) -- hampir full layar
-            Aspect.AspectRatio = 0 -- matikan ratio
+            -- 📱 Mobile (portrait): ambil hampir full layar
+            Main.Size = UDim2.new(0.9, 0, 0.9, 0)
         else
-            -- 💻 PC: elegan dengan rasio
-            Main.Size = UDim2.new(0.7, 0, 0.7, 0)
-            Aspect.AspectRatio = 16/9
+            -- 💻 PC: ukuran lebih elegan (ga full)
+            Main.Size = UDim2.new(0.6, 0, 0.7, 0)
         end
     end
 
     adjustSize()
-
     workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(adjustSize)
 
+    -- Biar rounded
     local MainCorner = Instance.new("UICorner")
     MainCorner.CornerRadius = UDim.new(0, 12)
     MainCorner.Parent = Main
+
 
 
     -- Header bar
