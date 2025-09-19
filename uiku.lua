@@ -126,6 +126,13 @@ function Framework:CreateWindow(Settings)
     TabLayout.Padding = UDim.new(0, 8)
     TabLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
+    -- ✅ DragArea di atas tab, biar gampang geser
+    local DragArea = Instance.new("Frame")
+    DragArea.Size = UDim2.new(1, 0, 1, 0)
+    DragArea.BackgroundTransparency = 1
+    DragArea.ZIndex = 10
+    DragArea.Parent = TabButtons
+
         -- Biar TabHolder auto ngikutin ukuran total tombol
     TabLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
         TabHolder.Size = UDim2.new(0, TabLayout.AbsoluteContentSize.X, 1, 0)
