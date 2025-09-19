@@ -1,6 +1,7 @@
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 local Framework = {}
+local Tabs = {}
 
 -- 🎬 Intro Custom
 local function ShowIntro()
@@ -153,7 +154,14 @@ function Framework:CreateWindow(Settings)
         ContentLayout.FillDirection = Enum.FillDirection.Vertical
         ContentLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
+        -- simpan ke tabel
         Tabs[TabName] = TabContent
+
+        -- kalau ini tab pertama, langsung aktif
+        if not next(Tabs) or (#TabButtons:GetChildren() == 2) then -- 1 UIListLayout + 1 tombol tab
+            TabContent.Visible = true
+        end
+
 
         -- Klik tab → tampilkan kontennya
         TabButton.MouseButton1Click:Connect(function()
@@ -162,6 +170,7 @@ function Framework:CreateWindow(Settings)
             end
             TabContent.Visible = true
         end)
+
 
         -- API: Button
         function Tab:CreateButton(Text, Callback)
