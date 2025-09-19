@@ -23,14 +23,12 @@ local function ShowIntro()
     Label.BackgroundTransparency = 1
     Label.Parent = Frame
 
-    -- Animasi masuk
     Frame.BackgroundTransparency = 1
     local tweenIn = TweenService:Create(Frame, TweenInfo.new(0.8), {BackgroundTransparency = 0})
     tweenIn:Play()
 
     task.wait(2)
 
-    -- Animasi keluar
     local tweenOut = TweenService:Create(Frame, TweenInfo.new(0.8), {BackgroundTransparency = 1})
     tweenOut:Play()
     tweenOut.Completed:Wait()
@@ -39,7 +37,6 @@ end
 
 -- 🏠 Create Window
 function Framework:CreateWindow(Settings)
-    -- tampilkan intro dulu
     ShowIntro()
 
     local Window = {}
@@ -67,7 +64,6 @@ function Framework:CreateWindow(Settings)
     -- ⚡ Draggable system
     do
         local dragging, dragInput, dragStart, startPos
-
         local function update(input)
             local delta = input.Position - dragStart
             Main.Position = UDim2.new(
@@ -104,30 +100,54 @@ function Framework:CreateWindow(Settings)
     end
 
     -- 📑 Tab system
+    local TabButtons = Instance.new("Frame")
+    TabButtons.Size = UDim2.new(1, 0, 0, 30)
+    TabButtons.BackgroundTransparency = 1
+    TabButtons.Parent = Main
+
     function Window:CreateTab(TabName)
         local Tab = {}
-        local TabButton = Instance.new("TextButton")
-        TabButton.Size = UDim2.new(0, 100, 0, 30)
-        TabButton.Text = TabName
-        TabButton.Parent = Main
 
-        -- Komponen Button
+        -- tombol tab
+        local TabButton = Instance.new("TextButton")
+        TabButton.Size = UDim2.new(0, 100, 1, 0)
+        TabButton.Text = TabName
+        TabButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+        TabButton.TextColor3 = Color3.fromRGB(255,255,255)
+        TabButton.Parent = TabButtons
+
+        -- konten tab
+        local TabContent = Instance.new("Frame")
+        TabContent.Size = UDim2.new(1, 0, 1, -30)
+        TabContent.Position = UDim2.new(0, 0, 0, 30)
+        TabContent.BackgroundTransparency = 1
+        TabContent.Visible = false
+        TabContent.Parent = Main
+
+        -- switch tab
+        TabButton.MouseButton1Click:Connect(function()
+            for _, child in pairs(Main:GetChildren()) do
+                if child:IsA("Frame") and child ~= TabButtons then
+                    child.Visible = false
+                end
+            end
+            TabContent.Visible = true
+        end)
+
+        -- API: CreateButton
         function Tab:CreateButton(Text, Callback)
             local Button = Instance.new("TextButton")
             Button.Size = UDim2.new(0, 200, 0, 40)
-            Button.Position = UDim2.new(0, 10, 0, 50)
+            Button.Position = UDim2.new(0, 10, 0, 10 + (#TabContent:GetChildren() * 50))
             Button.Text = Text
             Button.BackgroundColor3 = Color3.fromRGB(45,45,45)
             Button.TextColor3 = Color3.fromRGB(255,255,255)
-            Button.Parent = Main
+            Button.Parent = TabContent
 
             Button.MouseButton1Click:Connect(function()
-                if Callback then
-                    Callback()
-                end
+                if Callback then Callback() end
             end)
 
-            -- Animasi hover
             Button.MouseEnter:Connect(function()
                 TweenService:Create(Button, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(60,60,60)}):Play()
             end)
