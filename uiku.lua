@@ -75,10 +75,11 @@ function Framework:CreateWindow(Settings)
     Title.TextXAlignment = Enum.TextXAlignment.Left
     Title.Parent = Header
 
-        -- 🔘 Tombol Hide di pojok kanan atas
+        -- 🔘 Tombol Hide di atas tengah
     local HideButton = Instance.new("TextButton")
-    HideButton.Size = UDim2.new(0, 30, 0, 30)
-    HideButton.Position = UDim2.new(1, -35, 0, 2)
+    HideButton.Size = UDim2.new(0, 40, 0, 30)
+    HideButton.AnchorPoint = Vector2.new(0.5, 0) -- biar posisinya ditengah
+    HideButton.Position = UDim2.new(0.5, 0, 0, 2) -- 0.5 = tengah
     HideButton.Text = "–"
     HideButton.Font = Enum.Font.GothamBold
     HideButton.TextSize = 18
@@ -92,7 +93,7 @@ function Framework:CreateWindow(Settings)
     -- 🔲 Kotak kecil buat unhide
     local UnhideBox = Instance.new("TextButton")
     UnhideBox.Size = UDim2.new(0, 60, 0, 30)
-    UnhideBox.Position = UDim2.new(1, -70, 1, -50) -- pojok kanan bawah
+    UnhideBox.Position = UDim2.new(1, -70, 1, -50) -- pojok kanan bawah layar
     UnhideBox.Text = "RUINZ"
     UnhideBox.Font = Enum.Font.GothamBold
     UnhideBox.TextSize = 14
