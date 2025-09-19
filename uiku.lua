@@ -194,17 +194,22 @@ function Framework:CreateWindow(Settings)
         TabContent.Size = UDim2.new(1, -20, 1, -90)
         TabContent.Position = UDim2.new(0, 10, 0, 85)
         TabContent.BackgroundTransparency = 1
-        TabContent.ScrollBarThickness = 4 -- tipis aja biar rapi
-        TabContent.Visible = true
+        TabContent.ScrollBarThickness = 6 -- bisa 0 kalau mau tanpa bar
+        TabContent.ClipsDescendants = true
+        TabContent.Visible = false
         TabContent.Parent = Main
-        TabContent.CanvasSize = UDim2.new(0,0,0,0) -- auto-update nanti
 
+        -- biar bisa drag scroll di mobile
+        TabContent.ScrollingDirection = Enum.ScrollingDirection.Y -- scroll vertikal
+        TabContent.CanvasSize = UDim2.new(0,0,0,0)
+
+        -- layout isi tab
         local ContentLayout = Instance.new("UIListLayout", TabContent)
         ContentLayout.Padding = UDim.new(0, 8)
         ContentLayout.FillDirection = Enum.FillDirection.Vertical
         ContentLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
-        -- biar canvas size otomatis sesuai isi
+        -- auto update tinggi canvas
         ContentLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
             TabContent.CanvasSize = UDim2.new(0, 0, 0, ContentLayout.AbsoluteContentSize.Y)
         end)
