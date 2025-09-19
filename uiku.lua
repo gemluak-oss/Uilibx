@@ -220,7 +220,8 @@ function Framework:CreateWindow(Settings)
     end
 
 
-    -- 📑 Tab bar pakai ScrollingFrame
+
+    -- 📑 Tab bar
     local TabButtons = Instance.new("ScrollingFrame")
     TabButtons.Size = UDim2.new(1, -20, 0, 35)
     TabButtons.Position = UDim2.new(0, 10, 0, 45)
@@ -229,21 +230,19 @@ function Framework:CreateWindow(Settings)
     TabButtons.ScrollingDirection = Enum.ScrollingDirection.X
     TabButtons.CanvasSize = UDim2.new(0,0,0,0)
     TabButtons.Parent = Main
-    
+
     local TabLayout = Instance.new("UIListLayout", TabButtons)
     TabLayout.FillDirection = Enum.FillDirection.Horizontal
     TabLayout.Padding = UDim.new(0, 8)
     TabLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
-    local TabContent = Instance.new("ScrollingFrame")
-    TabContent.Size = UDim2.new(1, -20, 1, -110)
-    TabContent.Position = UDim2.new(0, 10, 0, 95) -- turun dikit setelah separator
-    TabContent.BackgroundTransparency = 1
-    TabContent.ScrollBarThickness = 6
-    TabContent.ClipsDescendants = true
-    TabContent.Visible = false
-    TabContent.Parent = Main
-
+    -- Separator
+    local Separator = Instance.new("Frame")
+    Separator.Size = UDim2.new(1, -20, 0, 1)
+    Separator.Position = UDim2.new(0, 10, 0, 85)
+    Separator.BackgroundColor3 = Color3.fromRGB(120, 120, 120)
+    Separator.BorderSizePixel = 0
+    Separator.Parent = Main
 
     -- auto resize canvas
     TabLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
@@ -275,7 +274,7 @@ function Framework:CreateWindow(Settings)
         -- Konten tab
         local TabContent = Instance.new("ScrollingFrame")
         TabContent.Size = UDim2.new(1, -20, 1, -90)
-        TabContent.Position = UDim2.new(0, 10, 0, 85)
+        TabContent.Position = UDim2.new(0, 10, 0, 95)
         TabContent.BackgroundTransparency = 1
         TabContent.ScrollBarThickness = 6 -- bisa 0 kalau mau tanpa bar
         TabContent.ClipsDescendants = true
