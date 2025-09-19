@@ -107,31 +107,22 @@ function Framework:CreateWindow(Settings)
         end)
     end
 
-    -- 📑 Tab bar (drag manual)
-    local TabButtons = Instance.new("Frame")
+    -- 📑 Tab bar pakai ScrollingFrame
+    local TabButtons = Instance.new("ScrollingFrame")
     TabButtons.Size = UDim2.new(1, -20, 0, 35)
     TabButtons.Position = UDim2.new(0, 10, 0, 45)
     TabButtons.BackgroundTransparency = 1
-    TabButtons.ClipsDescendants = true
+    TabButtons.ScrollBarThickness = 0 -- hilangin scrollbar abu²
+    TabButtons.ScrollingDirection = Enum.ScrollingDirection.X -- scroll horizontal
+    TabButtons.AutomaticCanvasSize = Enum.AutomaticSize.X -- canvas auto ngikutin isi
+    TabButtons.CanvasSize = UDim2.new(0,0,0,0) -- default awal
     TabButtons.Parent = Main
 
-    local TabHolder = Instance.new("Frame")
-    TabHolder.Size = UDim2.new(0, 0, 1, 0)
-    TabHolder.Position = UDim2.new(0, 0, 0, 0)
-    TabHolder.BackgroundTransparency = 1
-    TabHolder.Parent = TabButtons
-
-    local TabLayout = Instance.new("UIListLayout", TabHolder)
+    -- Layout tombol tab
+    local TabLayout = Instance.new("UIListLayout", TabButtons)
     TabLayout.FillDirection = Enum.FillDirection.Horizontal
     TabLayout.Padding = UDim.new(0, 8)
     TabLayout.SortOrder = Enum.SortOrder.LayoutOrder
-
-    -- ✅ DragArea di atas tab, biar gampang geser
-    local DragArea = Instance.new("Frame")
-    DragArea.Size = UDim2.new(1, 0, 1, 0)
-    DragArea.BackgroundTransparency = 1
-    DragArea.ZIndex = 10
-    DragArea.Parent = TabButtons
 
         -- Biar TabHolder auto ngikutin ukuran total tombol
     TabLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
@@ -184,7 +175,7 @@ function Framework:CreateWindow(Settings)
         TabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
         TabButton.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
         TabButton.AutoButtonColor = false
-        TabButton.Parent = TabHolder
+        TabButton.Parent = TabButtons
 
         local BtnCorner = Instance.new("UICorner", TabButton)
         BtnCorner.CornerRadius = UDim.new(0, 8)
