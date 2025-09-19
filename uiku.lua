@@ -104,6 +104,11 @@ function Framework:CreateWindow(Settings)
     TabButtons.Size = UDim2.new(1, 0, 0, 30)
     TabButtons.BackgroundTransparency = 1
     TabButtons.Parent = Main
+    local Layout = Instance.new("UIListLayout")
+    Layout.FillDirection = Enum.FillDirection.Horizontal
+    Layout.SortOrder = Enum.SortOrder.LayoutOrder
+    Layout.Parent = TabButtons
+
 
     function Window:CreateTab(TabName)
         local Tab = {}
