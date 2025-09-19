@@ -45,11 +45,11 @@ function Framework:CreateWindow(Settings)
     ScreenGui.Name = Settings.Name or "RuinzUI"
     ScreenGui.Parent = game:GetService("CoreGui")
 
-    -- Main window gaya Rayfield
+        -- Main window gaya Rayfield (PC & Mobile support)
     local Main = Instance.new("Frame")
-    Main.Size = UDim2.new(0, 500, 0, 350) -- ukuran fix kayak Rayfield
-    Main.Position = UDim2.new(0.5, -250, 0.5, -175) -- auto center
-    Main.AnchorPoint = Vector2.new(0.5, 0.5)
+    Main.Size = UDim2.new(0, 500, 0, 350) -- ukuran fix
+    Main.AnchorPoint = Vector2.new(0.5, 0.5) -- pusat frame
+    Main.Position = UDim2.new(0.5, 0, 0.5, 0) -- selalu di tengah layar
     Main.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     Main.BorderSizePixel = 0
     Main.Parent = ScreenGui
@@ -58,11 +58,6 @@ function Framework:CreateWindow(Settings)
     MainCorner.CornerRadius = UDim.new(0, 12)
     MainCorner.Parent = Main
 
-
-    -- Biar rounded
-    local MainCorner = Instance.new("UICorner")
-    MainCorner.CornerRadius = UDim.new(0, 12)
-    MainCorner.Parent = Main
 
     -- Header bar
     local Header = Instance.new("Frame")
@@ -234,7 +229,7 @@ function Framework:CreateWindow(Settings)
     TabButtons.ScrollingDirection = Enum.ScrollingDirection.X
     TabButtons.CanvasSize = UDim2.new(0,0,0,0)
     TabButtons.Parent = Main
-
+    
     local TabLayout = Instance.new("UIListLayout", TabButtons)
     TabLayout.FillDirection = Enum.FillDirection.Horizontal
     TabLayout.Padding = UDim.new(0, 8)
