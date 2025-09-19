@@ -75,11 +75,10 @@ function Framework:CreateWindow(Settings)
     Title.TextXAlignment = Enum.TextXAlignment.Left
     Title.Parent = Header
 
-        -- 🔘 Tombol Hide di atas tengah
+    -- 🔘 Tombol Hide di pojok kanan atas
     local HideButton = Instance.new("TextButton")
-    HideButton.Size = UDim2.new(0, 40, 0, 30)
-    HideButton.AnchorPoint = Vector2.new(0.5, 0) -- biar posisinya ditengah
-    HideButton.Position = UDim2.new(0.5, 0, 0, 2) -- 0.5 = tengah
+    HideButton.Size = UDim2.new(0, 30, 0, 30)
+    HideButton.Position = UDim2.new(1, -35, 0, 2)
     HideButton.Text = "–"
     HideButton.Font = Enum.Font.GothamBold
     HideButton.TextSize = 18
@@ -90,20 +89,23 @@ function Framework:CreateWindow(Settings)
     local BtnCorner = Instance.new("UICorner", HideButton)
     BtnCorner.CornerRadius = UDim.new(0, 6)
 
-    -- 🔲 Kotak kecil buat unhide
+    -- 🔲 Tombol Unhide (atas tengah, oval abu-abu transparan)
     local UnhideBox = Instance.new("TextButton")
-    UnhideBox.Size = UDim2.new(0, 60, 0, 30)
-    UnhideBox.Position = UDim2.new(1, -70, 1, -50) -- pojok kanan bawah layar
-    UnhideBox.Text = "RUINZ"
+    UnhideBox.Size = UDim2.new(0, 120, 0, 35) -- persegi panjang kecil
+    UnhideBox.AnchorPoint = Vector2.new(0.5, 0)
+    UnhideBox.Position = UDim2.new(0.5, 0, 0, 10) -- atas tengah
+    UnhideBox.Text = "RUINZHUB"
     UnhideBox.Font = Enum.Font.GothamBold
     UnhideBox.TextSize = 14
     UnhideBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-    UnhideBox.BackgroundColor3 = Color3.fromRGB(50, 150, 250)
+    UnhideBox.BackgroundColor3 = Color3.fromRGB(100, 100, 100) -- abu-abu
+    UnhideBox.BackgroundTransparency = 0.3 -- transparan
     UnhideBox.Visible = false
     UnhideBox.Parent = ScreenGui
 
     local BoxCorner = Instance.new("UICorner", UnhideBox)
-    BoxCorner.CornerRadius = UDim.new(0, 8)
+    BoxCorner.CornerRadius = UDim.new(1, 0) -- bikin oval penuh
+
 
     -- 🔄 Logic hide/unhide
     HideButton.MouseButton1Click:Connect(function()
@@ -115,7 +117,6 @@ function Framework:CreateWindow(Settings)
         Main.Visible = true
         UnhideBox.Visible = false
     end)
-
 
     -- ⚡ Draggable window (PC & Mobile)
     do
