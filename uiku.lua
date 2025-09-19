@@ -110,16 +110,24 @@ function Framework:CreateWindow(Settings)
     end
 
     -- Tab bar
-    local TabButtons = Instance.new("Frame")
+    
+    local TabButtons = Instance.new("ScrollingFrame")
     TabButtons.Size = UDim2.new(1, -20, 0, 35)
     TabButtons.Position = UDim2.new(0, 10, 0, 45)
     TabButtons.BackgroundTransparency = 1
+    TabButtons.ScrollBarThickness = 4 -- ketebalan scrollbar
+    TabButtons.ScrollingDirection = Enum.ScrollingDirection.X
+    TabButtons.AutomaticCanvasSize = Enum.AutomaticSize.X
+    TabButtons.CanvasSize = UDim2.new(0,0,0,0) -- biar auto
     TabButtons.Parent = Main
+
+
 
     local TabLayout = Instance.new("UIListLayout", TabButtons)
     TabLayout.FillDirection = Enum.FillDirection.Horizontal
     TabLayout.Padding = UDim.new(0, 8)
     TabLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
 
     -- Container untuk tab contents
     local Tabs = {}
