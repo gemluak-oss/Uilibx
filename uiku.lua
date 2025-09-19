@@ -102,7 +102,7 @@ function Framework:CreateWindow(Settings)
     -- 📑 Tab system
     local TabButtons = Instance.new("Frame")
     TabButtons.Size = UDim2.new(1, 0, 0, 30)
-    TabButtons.Position = UDim2.new(0, 0, 0, 30) -- geser ke bawah 30px
+    TabButtons.Position = UDim2.new(0, 0, 0, 30)
     TabButtons.BackgroundTransparency = 1
     TabButtons.Parent = Main
     local Layout = Instance.new("UIListLayout")
@@ -124,11 +124,12 @@ function Framework:CreateWindow(Settings)
 
         -- konten tab
         local TabContent = Instance.new("Frame")
-        TabContent.Size = UDim2.new(1, 0, 1, -30)
-        TabContent.Position = UDim2.new(0, 0, 0, 30)
+        TabContent.Size = UDim2.new(1, 0, 1, -60) -- sisanya (350 - 60 = 290px)
+        TabContent.Position = UDim2.new(0, 0, 0, 60) -- mulai setelah Title(30) + TabBar(30)
         TabContent.BackgroundTransparency = 1
         TabContent.Visible = false
         TabContent.Parent = Main
+
 
         -- switch tab
         TabButton.MouseButton1Click:Connect(function()
