@@ -89,7 +89,7 @@ function Framework:CreateWindow(Settings)
     local BtnCorner = Instance.new("UICorner", HideButton)
     BtnCorner.CornerRadius = UDim.new(0, 6)
 
-    -- 🔲 Tombol Unhide (atas tengah, oval outline RGB transparan cyberpunk)
+    -- 🔲 Tombol Unhide (atas tengah, oval hijau transparan + outline RGB)
     local UnhideBox = Instance.new("TextButton")
     UnhideBox.Size = UDim2.new(0, 140, 0, 35)
     UnhideBox.AnchorPoint = Vector2.new(0.5, 0)
@@ -98,7 +98,8 @@ function Framework:CreateWindow(Settings)
     UnhideBox.Font = Enum.Font.GothamBold
     UnhideBox.TextSize = 16
     UnhideBox.TextColor3 = Color3.fromRGB(255, 255, 255) -- teks putih tebal
-    UnhideBox.BackgroundTransparency = 1 -- background transparan
+    UnhideBox.BackgroundColor3 = Color3.fromRGB(0, 255, 100) -- hijau neon
+    UnhideBox.BackgroundTransparency = 0.4 -- agak transparan
     UnhideBox.Visible = false
     UnhideBox.Parent = ScreenGui
 
@@ -110,7 +111,7 @@ function Framework:CreateWindow(Settings)
     local Outline = Instance.new("UIStroke")
     Outline.Thickness = 2
     Outline.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-    Outline.Transparency = 0.3 -- agak transparan
+    Outline.Transparency = 0.2 -- sedikit transparan
     Outline.Parent = UnhideBox
 
     -- 🔄 Animasi RGB Outline
@@ -125,6 +126,7 @@ function Framework:CreateWindow(Settings)
             task.wait(0.03)
         end
     end)
+
 
 
     -- 🔄 Logic hide/unhide
