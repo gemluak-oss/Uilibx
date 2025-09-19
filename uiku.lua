@@ -73,7 +73,7 @@ function Framework:CreateWindow(Settings)
     Title.TextXAlignment = Enum.TextXAlignment.Left
     Title.Parent = Header
 
-    -- ⚡ Draggable window
+    -- ⚡ Draggable window (PC & Mobile)
     do
         local dragging, dragInput, dragStart, startPos
         local function update(input)
@@ -83,8 +83,10 @@ function Framework:CreateWindow(Settings)
                 startPos.Y.Scale, startPos.Y.Offset + delta.Y
             )
         end
+
         Header.InputBegan:Connect(function(input)
-            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            if input.UserInputType == Enum.UserInputType.MouseButton1 
+            or input.UserInputType == Enum.UserInputType.Touch then -- ✅ dukung mobile
                 dragging = true
                 dragStart = input.Position
                 startPos = Main.Position
@@ -95,11 +97,14 @@ function Framework:CreateWindow(Settings)
                 end)
             end
         end)
+
         Header.InputChanged:Connect(function(input)
-            if input.UserInputType == Enum.UserInputType.MouseMovement then
+            if input.UserInputType == Enum.UserInputType.MouseMovement 
+            or input.UserInputType == Enum.UserInputType.Touch then -- ✅ dukung mobile
                 dragInput = input
             end
         end)
+
         UserInputService.InputChanged:Connect(function(input)
             if input == dragInput and dragging then
                 update(input)
@@ -107,58 +112,28 @@ function Framework:CreateWindow(Settings)
         end)
     end
 
+
     -- 📑 Tab bar pakai ScrollingFrame
     local TabButtons = Instance.new("ScrollingFrame")
     TabButtons.Size = UDim2.new(1, -20, 0, 35)
     TabButtons.Position = UDim2.new(0, 10, 0, 45)
     TabButtons.BackgroundTransparency = 1
-    TabButtons.ScrollBarThickness = 0 -- hilangin scrollbar abu²
-    TabButtons.ScrollingDirection = Enum.ScrollingDirection.X -- scroll horizontal
-    TabButtons.AutomaticCanvasSize = Enum.AutomaticSize.X -- canvas auto ngikutin isi
-    TabButtons.CanvasSize = UDim2.new(0,0,0,0) -- default awal
+    TabButtons.ScrollBarThickness = 0
+    TabButtons.ScrollingDirection = Enum.ScrollingDirection.X
+    TabButtons.CanvasSize = UDim2.new(0,0,0,0)
     TabButtons.Parent = Main
 
-    -- Layout tombol tab
     local TabLayout = Instance.new("UIListLayout", TabButtons)
     TabLayout.FillDirection = Enum.FillDirection.Horizontal
     TabLayout.Padding = UDim.new(0, 8)
     TabLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
-        -- Biar TabHolder auto ngikutin ukuran total tombol
+    -- auto resize canvas
     TabLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-        TabHolder.Size = UDim2.new(0, TabLayout.AbsoluteContentSize.X, 1, 0)
+        TabButtons.CanvasSize = UDim2.new(0, TabLayout.AbsoluteContentSize.X, 0, 0)
     end)
 
-    -- Drag system
-    do
-        local dragging = false
-        local dragStart, startPos
 
-        DragArea.InputBegan:Connect(function(input)
-            if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                dragging = true
-                dragStart = input.Position
-                startPos = TabHolder.Position
-                input.Changed:Connect(function()
-                    if input.UserInputState == Enum.UserInputState.End then
-                        dragging = false
-                    end
-                end)
-            end
-        end)
-
-        UserInputService.InputChanged:Connect(function(input)
-            if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
-                local delta = input.Position - dragStart
-                local newX = startPos.X.Offset + delta.X
-
-                local maxOffset = 0
-                local minOffset = math.min(0, TabButtons.AbsoluteSize.X - TabHolder.AbsoluteSize.X)
-
-                TabHolder.Position = UDim2.new(0, math.clamp(newX, minOffset, maxOffset), 0, 0)
-            end
-        end)
-    end
 
     -- Container untuk tab contents
     local Tabs = {}
