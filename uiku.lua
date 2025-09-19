@@ -75,6 +75,47 @@ function Framework:CreateWindow(Settings)
     Title.TextXAlignment = Enum.TextXAlignment.Left
     Title.Parent = Header
 
+        -- 🔘 Tombol Hide di pojok kanan atas
+    local HideButton = Instance.new("TextButton")
+    HideButton.Size = UDim2.new(0, 30, 0, 30)
+    HideButton.Position = UDim2.new(1, -40, 0, 2)
+    HideButton.Text = "–"
+    HideButton.Font = Enum.Font.GothamBold
+    HideButton.TextSize = 18
+    HideButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    HideButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+    HideButton.Parent = Header
+
+    local BtnCorner = Instance.new("UICorner", HideButton)
+    BtnCorner.CornerRadius = UDim.new(0, 6)
+
+    -- 🔲 Kotak kecil buat unhide
+    local UnhideBox = Instance.new("TextButton")
+    UnhideBox.Size = UDim2.new(0, 60, 0, 30)
+    UnhideBox.Position = UDim2.new(1, -70, 1, -50) -- pojok kanan bawah
+    UnhideBox.Text = "RUINZ"
+    UnhideBox.Font = Enum.Font.GothamBold
+    UnhideBox.TextSize = 14
+    UnhideBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+    UnhideBox.BackgroundColor3 = Color3.fromRGB(50, 150, 250)
+    UnhideBox.Visible = false -- default hidden
+    UnhideBox.Parent = ScreenGui
+
+    local BoxCorner = Instance.new("UICorner", UnhideBox)
+    BoxCorner.CornerRadius = UDim.new(0, 8)
+
+    -- 🔄 Logic hide/unhide
+    HideButton.MouseButton1Click:Connect(function()
+        Main.Visible = false
+        UnhideBox.Visible = true
+    end)
+
+    UnhideBox.MouseButton1Click:Connect(function()
+        Main.Visible = true
+        UnhideBox.Visible = false
+    end)
+
+
     -- ⚡ Draggable window (PC & Mobile)
     do
         local dragging, dragInput, dragStart, startPos
