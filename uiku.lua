@@ -6,7 +6,7 @@ local Framework = {}
 local Tabs = {}
 local tabCount = 0
 
--- 🎬 Intro Custom (Center + Animasi Fix + Outro Bertahap)
+
 -- 🎬 Intro Custom (Typewriter + Glow + Outro Bertahap)
 local function ShowIntro()
     local IntroGui = Instance.new("ScreenGui")
