@@ -39,8 +39,8 @@ local function ShowIntro()
 
     -- 🌟 Glow effect
     local UIStroke = Instance.new("UIStroke", Label)
-    UIStroke.Thickness = 1.5
-    UIStroke.Color = Color3.fromRGB(0, 153, 0)
+    UIStroke.Thickness = 1
+    UIStroke.Color = Color3.fromRGB(0, 255, 0)
     UIStroke.Transparency = 0.5
 
     -- 🎞️ Tween masuk (kotak expand)
