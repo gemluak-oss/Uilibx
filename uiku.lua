@@ -278,7 +278,7 @@ function Framework:CreateWindow(Settings)
 
         -- ✅ Tambahin padding biar konten ga kepotong
         local ContentPadding = Instance.new("UIPadding")
-        ContentPadding.PaddingBottom = UDim.new(0, 30) -- jarak ekstra bawah
+        ContentPadding.PaddingBottom = UDim.new(0, 20) -- jarak ekstra bawah
         ContentPadding.PaddingTop = UDim.new(0, 5)
         ContentPadding.PaddingLeft = UDim.new(0, 5)
         ContentPadding.PaddingRight = UDim.new(0, 5)
