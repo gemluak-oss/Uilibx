@@ -254,7 +254,7 @@ function Framework:CreateWindow(Settings)
 
         -- Tombol tab
         local TabButton = Instance.new("TextButton")
-        TabButton.Size = UDim2.new(0, 50, 1, 0)
+        TabButton.Size = UDim2.new(0, 50, 0, 25)
         TabButton.Text = TabName
         TabButton.Font = Enum.Font.Gotham
         TabButton.TextSize = 14
