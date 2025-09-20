@@ -57,14 +57,17 @@ local function ShowIntro()
         end
     end)
 
-    task.wait(3)
+    -- 🎞️ Outro (teks dulu → kotak)
+    task.wait(2.5) -- jeda tampil
 
-    -- 🎞️ Fade out teks dulu
+    -- Fade out teks + glow bersamaan
     local fadeText = TweenService:Create(Label, TweenInfo.new(0.6), {TextTransparency = 1})
+    local fadeGlow = TweenService:Create(UIStroke, TweenInfo.new(0.6), {Transparency = 1})
     fadeText:Play()
+    fadeGlow:Play()
     fadeText.Completed:Wait()
 
-    -- 🎞️ Baru kotak out
+    -- Baru shrink kotaknya
     local tweenOut = TweenService:Create(Frame, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
         Size = UDim2.new(0, 0, 0, 0),
         BackgroundTransparency = 1
@@ -73,6 +76,7 @@ local function ShowIntro()
     tweenOut.Completed:Wait()
 
     IntroGui:Destroy()
+    
 end
 
 
