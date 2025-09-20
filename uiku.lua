@@ -265,7 +265,7 @@ function Framework:CreateWindow(Settings)
 
         local BtnCorner = Instance.new("UICorner", TabButton)
         BtnCorner.CornerRadius = UDim.new(0, 6)
-        
+                
         -- Konten tab
         local TabContent = Instance.new("ScrollingFrame")
         TabContent.Size = UDim2.new(1, -20, 1, -120)
@@ -276,16 +276,24 @@ function Framework:CreateWindow(Settings)
         TabContent.Visible = false
         TabContent.Parent = Main
 
-        -- ✅ Tambahin padding di sini
+        -- ✅ Tambahin padding biar konten ga kepotong
         local ContentPadding = Instance.new("UIPadding")
-        ContentPadding.PaddingBottom = UDim.new(0, 30) -- jarak ekstra dari bawah
+        ContentPadding.PaddingBottom = UDim.new(0, 30) -- jarak ekstra bawah
         ContentPadding.PaddingTop = UDim.new(0, 5)
+        ContentPadding.PaddingLeft = UDim.new(0, 5)
+        ContentPadding.PaddingRight = UDim.new(0, 5)
         ContentPadding.Parent = TabContent
 
-        -- layout isi tab
+        -- Layout isi tab
         local ContentLayout = Instance.new("UIListLayout", TabContent)
         ContentLayout.Padding = UDim.new(0, 8)
+        ContentLayout.FillDirection = Enum.FillDirection.Vertical
+        ContentLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
+        -- auto update tinggi canvas
+        ContentLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+            TabContent.CanvasSize = UDim2.new(0, 0, 0, ContentLayout.AbsoluteContentSize.Y)
+        end)
 
 
         -- biar bisa scroll pakai mouse wheel langsung di area konten
