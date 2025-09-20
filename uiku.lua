@@ -218,7 +218,7 @@ function Framework:CreateWindow(Settings)
 
     -- 📑 Tab bar
     local TabButtons = Instance.new("ScrollingFrame")
-    TabButtons.Size = UDim2.new(1, -20, 0, 25) -- tinggi 25px
+    TabButtons.Size = UDim2.new(1, -20, 0, 30) -- lebih tipis
     TabButtons.Position = UDim2.new(0, 10, 0, 45)
     TabButtons.BackgroundTransparency = 1
     TabButtons.ScrollBarThickness = 0
@@ -228,14 +228,14 @@ function Framework:CreateWindow(Settings)
 
     local TabLayout = Instance.new("UIListLayout", TabButtons)
     TabLayout.FillDirection = Enum.FillDirection.Horizontal
-    TabLayout.Padding = UDim.new(0, 8)
+    TabLayout.Padding = UDim.new(0, 6) -- jarak antar tab lebih kecil
     TabLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
     -- Separator
     local Separator = Instance.new("Frame")
     Separator.Size = UDim2.new(1, -20, 0, 1)
-    Separator.Position = UDim2.new(0, 10, 0, 85)
-    Separator.BackgroundColor3 = Color3.fromRGB(120, 120, 120)
+    Separator.Position = UDim2.new(0, 10, 0, 80) -- pas di bawah tab
+    Separator.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
     Separator.BorderSizePixel = 0
     Separator.Parent = Main
 
@@ -254,33 +254,34 @@ function Framework:CreateWindow(Settings)
 
         -- Tombol tab
         local TabButton = Instance.new("TextButton")
-        TabButton.Size = UDim2.new(0, 70, 0, 25) -- lebar 70, tinggi 25
+        TabButton.Size = UDim2.new(0, 90, 0, 28) -- seragam: lebar 90px, tinggi 28px
         TabButton.Text = TabName
-        TabButton.Font = Enum.Font.Gotham
-        TabButton.TextSize = 12
+        TabButton.Font = Enum.Font.GothamMedium
+        TabButton.TextSize = 13
         TabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
         TabButton.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
         TabButton.AutoButtonColor = false
         TabButton.Parent = TabButtons
 
         local BtnCorner = Instance.new("UICorner", TabButton)
-        BtnCorner.CornerRadius = UDim.new(0, 8)
+        BtnCorner.CornerRadius = UDim.new(0, 6)
 
         -- Konten tab
         local TabContent = Instance.new("ScrollingFrame")
-        TabContent.Size = UDim2.new(1, -20, 1, -120) -- kurangi tinggi lebih banyak
-        TabContent.Position = UDim2.new(0, 10, 0, 95) -- tetap mulai di bawah tab + separator
-
+        TabContent.Size = UDim2.new(1, -20, 1, -120)
+        TabContent.Position = UDim2.new(0, 10, 0, 95)
         TabContent.BackgroundTransparency = 1
         TabContent.ScrollBarThickness = 6
         TabContent.ClipsDescendants = true
         TabContent.Visible = false
         TabContent.Parent = Main
 
-        -- Padding biar isi tab tidak nempel ke bawah
+        -- Padding isi tab
         local ContentPadding = Instance.new("UIPadding")
-        ContentPadding.PaddingBottom = UDim.new(0, 10) -- jarak bawah
-        ContentPadding.PaddingTop = UDim.new(0, 5)     -- jarak atas
+        ContentPadding.PaddingBottom = UDim.new(0, 10)
+        ContentPadding.PaddingTop = UDim.new(0, 10)
+        ContentPadding.PaddingLeft = UDim.new(0, 5)
+        ContentPadding.PaddingRight = UDim.new(0, 5)
         ContentPadding.Parent = TabContent
 
 
@@ -290,7 +291,7 @@ function Framework:CreateWindow(Settings)
         -- biar bisa drag scroll di mobile
         TabContent.ScrollingDirection = Enum.ScrollingDirection.Y -- scroll vertikal
 
-        -- layout isi tab
+        -- Layout isi tab
         local ContentLayout = Instance.new("UIListLayout", TabContent)
         ContentLayout.Padding = UDim.new(0, 8)
         ContentLayout.FillDirection = Enum.FillDirection.Vertical
