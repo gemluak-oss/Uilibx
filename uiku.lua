@@ -104,17 +104,13 @@ function Framework:CreateWindow(Settings)
     end)
 
 
-    -- 🔲 Tombol Unhide (atas tengah, oval hijau transparan + outline RGB)
-    local UnhideBox = Instance.new("TextButton")
-    UnhideBox.Size = UDim2.new(0, 140, 0, 35)
+    -- 🔲 Tombol Unhide (atas tengah, logo aja)
+    local UnhideBox = Instance.new("ImageButton")
+    UnhideBox.Size = UDim2.new(0, 50, 0, 50) -- sesuaikan ukuran logo
     UnhideBox.AnchorPoint = Vector2.new(0.5, 0)
     UnhideBox.Position = UDim2.new(0.5, 0, 0, 10) -- atas tengah
-    UnhideBox.Text = "RUINZHUB"
-    UnhideBox.Font = Enum.Font.GothamBold
-    UnhideBox.TextSize = 16
-    UnhideBox.TextColor3 = Color3.fromRGB(255, 255, 255) -- teks putih tebal
-    UnhideBox.BackgroundColor3 = Color3.fromRGB(0, 255, 100) -- hijau neon
-    UnhideBox.BackgroundTransparency = 0.4 -- agak transparan
+    UnhideBox.BackgroundTransparency = 1 -- transparan
+    UnhideBox.Image = "rbxassetid://71678601582898" -- ganti dengan asset ID logomu
     UnhideBox.Visible = false
     UnhideBox.Parent = ScreenGui
 
