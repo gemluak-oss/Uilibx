@@ -40,6 +40,7 @@ end
 
 -- 🏠 Create Window
 function Framework:CreateWindow(Settings)
+    ShowIntro()
     local Window = {}
     local ScreenGui = Instance.new("ScreenGui")
     ScreenGui.Name = Settings.Name or "RuinzUI"
@@ -80,11 +81,28 @@ function Framework:CreateWindow(Settings)
     HideButton.Font = Enum.Font.GothamBold
     HideButton.TextSize = 18
     HideButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-    HideButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+    HideButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30) -- default abu gelap
+    HideButton.AutoButtonColor = false
     HideButton.Parent = Header
 
     local BtnCorner = Instance.new("UICorner", HideButton)
     BtnCorner.CornerRadius = UDim.new(0, 6)
+
+    -- 🎨 Efek hover (abu abu terang saat kursor masuk)
+    HideButton.MouseEnter:Connect(function()
+        HideButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+    end)
+
+    HideButton.MouseLeave:Connect(function()
+        HideButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    end)
+
+    -- Saat ditekan
+    HideButton.MouseButton1Click:Connect(function()
+        Main.Visible = false
+        UnhideBox.Visible = true
+    end)
+
 
     -- 🔲 Tombol Unhide (atas tengah, oval hijau transparan + outline RGB)
     local UnhideBox = Instance.new("TextButton")
