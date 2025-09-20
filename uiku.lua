@@ -47,7 +47,7 @@ function Framework:CreateWindow(Settings)
 
     -- Main window gaya Rayfield (PC & Mobile support)
     local Main = Instance.new("Frame")
-    Main.Size = UDim2.new(0, 500, 0, 400) -- ukuran fix
+    Main.Size = UDim2.new(0, 500, 0, 330) -- ukuran fix
     Main.AnchorPoint = Vector2.new(0.5, 0.5) -- acuan tengah
     Main.Position = UDim2.new(0.5, 0, 0.5) -- geser 40px ke atas
     Main.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
@@ -265,23 +265,22 @@ function Framework:CreateWindow(Settings)
 
         local BtnCorner = Instance.new("UICorner", TabButton)
         BtnCorner.CornerRadius = UDim.new(0, 6)
-
+        
         -- Konten tab
         local TabContent = Instance.new("ScrollingFrame")
-        TabContent.Size = UDim2.new(1, -20, 1, -100) -- kurangi biar ga kepotong
-        TabContent.Position = UDim2.new(0, 10, 0, 95)
+        TabContent.Size = UDim2.new(1, -20, 1, -120) -- kurangi tinggi lebih banyak
+        TabContent.Position = UDim2.new(0, 10, 0, 95) -- tetap mulai di bawah tab + separator
+
         TabContent.BackgroundTransparency = 1
         TabContent.ScrollBarThickness = 6
         TabContent.ClipsDescendants = true
         TabContent.Visible = false
         TabContent.Parent = Main
 
-        -- Padding isi tab
+        -- Padding biar isi tab tidak nempel ke bawah
         local ContentPadding = Instance.new("UIPadding")
-        ContentPadding.PaddingBottom = UDim.new(0, 20) -- lebih lega di bawah
-        ContentPadding.PaddingTop = UDim.new(0, 8)
-        ContentPadding.PaddingLeft = UDim.new(0, 5)
-        ContentPadding.PaddingRight = UDim.new(0, 5)
+        ContentPadding.PaddingBottom = UDim.new(0, 10) -- jarak bawah
+        ContentPadding.PaddingTop = UDim.new(0, 5)     -- jarak atas
         ContentPadding.Parent = TabContent
 
 
@@ -291,7 +290,7 @@ function Framework:CreateWindow(Settings)
         -- biar bisa drag scroll di mobile
         TabContent.ScrollingDirection = Enum.ScrollingDirection.Y -- scroll vertikal
 
-        -- Layout isi tab
+        -- layout isi tab
         local ContentLayout = Instance.new("UIListLayout", TabContent)
         ContentLayout.Padding = UDim.new(0, 8)
         ContentLayout.FillDirection = Enum.FillDirection.Vertical
