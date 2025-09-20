@@ -268,8 +268,8 @@ function Framework:CreateWindow(Settings)
         
         -- Konten tab
         local TabContent = Instance.new("ScrollingFrame")
-        TabContent.Size = UDim2.new(1, -20, 1, -80) -- tambah ruang biar tidak kepotong
-        TabContent.Position = UDim2.new(0, 10, 0, 95)
+        TabContent.Size = UDim2.new(1, -20, 1, -90) -- jangan terlalu kecil
+        TabContent.Position = UDim2.new(0, 10, 0, 85)
         TabContent.BackgroundTransparency = 1
         TabContent.ScrollBarThickness = 6
         TabContent.ClipsDescendants = true
@@ -278,8 +278,8 @@ function Framework:CreateWindow(Settings)
 
         -- Padding biar isi tab tidak nempel ke bawah
         local ContentPadding = Instance.new("UIPadding")
-        ContentPadding.PaddingBottom = UDim.new(0, 10) -- jarak bawah
-        ContentPadding.PaddingTop = UDim.new(0, 5)     -- jarak atas
+        ContentPadding.PaddingBottom = UDim.new(0, 30) -- biar tombol terakhir ada jarak dari bawah
+        ContentPadding.PaddingTop = UDim.new(0, 5)     
         ContentPadding.Parent = TabContent
 
 
