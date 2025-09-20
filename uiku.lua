@@ -28,18 +28,19 @@ local function ShowIntro()
 
     local Label = Instance.new("TextLabel")
     Label.Size = UDim2.new(1, 0, 1, 0)
-    Label.Text = "" -- kosong dulu (typewriter)
-    Label.Font = Enum.Font.GothamBold
-    Label.TextSize = 24
-    Label.TextColor3 = Color3.fromRGB(255,255,255)
+    Label.Text = "RuinzHub"
+    Label.Font = Enum.Font.SciFi -- ⚡ ganti ke font SciFi
+    Label.TextSize = 28
+    Label.TextColor3 = Color3.fromRGB(255, 255, 255)
     Label.BackgroundTransparency = 1
-    Label.TextTransparency = 0
+    Label.TextTransparency = 1
     Label.Parent = Frame
+
 
     -- 🌟 Glow effect
     local UIStroke = Instance.new("UIStroke", Label)
     UIStroke.Thickness = 1.5
-    UIStroke.Color = Color3.fromRGB(0, 170, 255)
+    UIStroke.Color = Color3.fromRGB(0, 153, 0)
     UIStroke.Transparency = 0.5
 
     -- 🎞️ Tween masuk (kotak expand)
