@@ -117,7 +117,7 @@ function Framework:CreateWindow(Settings)
 
     -- 🔘 bikin sudut bulat
     local BoxCorner = Instance.new("UICorner")
-    BoxCorner.CornerRadius = UDim.new(0, 30) -- atur bulatnya (semakin besar semakin bulat)
+    BoxCorner.CornerRadius = UDim.new(0, 10) -- atur bulatnya (semakin besar semakin bulat)
     BoxCorner.Parent = UnhideBox
 
 
