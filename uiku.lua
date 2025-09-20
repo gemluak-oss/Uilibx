@@ -47,7 +47,7 @@ function Framework:CreateWindow(Settings)
 
     -- Main window gaya Rayfield (PC & Mobile support)
     local Main = Instance.new("Frame")
-    Main.Size = UDim2.new(0, 500, 0, 40) -- ukuran fix
+    Main.Size = UDim2.new(0, 500, 0, 400) -- ukuran fix
     Main.AnchorPoint = Vector2.new(0.5, 0.5) -- acuan tengah
     Main.Position = UDim2.new(0.5, 0, 0.5) -- geser 40px ke atas
     Main.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
