@@ -104,23 +104,28 @@ function Framework:CreateWindow(Settings)
     end)
 
 
-        -- 🔲 Tombol Unhide (atas tengah, logo aja)
-    local UnhideBox = Instance.new("ImageButton")
-    UnhideBox.Size = UDim2.new(0, 50, 0, 50) -- ukuran logo
+    -- Background kotak tumpul
+    local UnhideBox = Instance.new("Frame")
+    UnhideBox.Size = UDim2.new(0, 60, 0, 60)
     UnhideBox.AnchorPoint = Vector2.new(0.5, 0)
-    UnhideBox.Position = UDim2.new(0.5, 0, 0, 10) -- atas tengah
-    UnhideBox.BackgroundTransparency = 0 -- biar ada background buat corner
-    UnhideBox.BackgroundColor3 = Color3.fromRGB(30,30,30) -- opsional (warna abu gelap)
-    UnhideBox.Image = "rbxassetid://71678601582898" -- ganti dengan asset ID logomu
+    UnhideBox.Position = UDim2.new(0.5, 0, 0, 10)
+    UnhideBox.BackgroundColor3 = Color3.fromRGB(30,30,30)
     UnhideBox.Visible = false
     UnhideBox.Parent = ScreenGui
 
-    -- 🔘 bikin sudut bulat
     local BoxCorner = Instance.new("UICorner")
-    BoxCorner.CornerRadius = UDim.new(0, 10) -- sudut agak tumpul
+    BoxCorner.CornerRadius = UDim.new(0, 10) -- sudut tumpul
     BoxCorner.Parent = UnhideBox
 
-
+    -- Logo di dalamnya
+    local Logo = Instance.new("ImageButton")
+    Logo.Size = UDim2.new(1, -10, 1, -10) -- kasih jarak biar ada padding
+    Logo.Position = UDim2.new(0.5, 0, 0.5, 0)
+    Logo.AnchorPoint = Vector2.new(0.5, 0.5)
+    Logo.BackgroundTransparency = 1
+    Logo.Image = "rbxassetid://71678601582898"
+    Logo.Parent = UnhideBox
+    
 
      -- ⚡ Biar UnhideBox bisa digeser di PC & Mobile
     do
