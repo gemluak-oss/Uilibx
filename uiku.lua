@@ -48,9 +48,16 @@ function Framework:CreateWindow(Settings)
 
     -- Main window gaya Rayfield (PC & Mobile support)
     local Main = Instance.new("Frame")
-    Main.Size = UDim2.new(0, 450, 0, 350) -- ukuran fix
-    Main.AnchorPoint = Vector2.new(0.5, 0.5) -- acuan tengah
-    Main.Position = UDim2.new(0.5, 0, 0.5) -- geser 40px ke atas
+    if UserInputService.TouchEnabled then
+        -- 📱 Mobile → lebih kecil
+        Main.Size = UDim2.new(0, 350, 0, 280)
+    else
+        -- 💻 PC → normal
+        Main.Size = UDim2.new(0, 450, 0, 350)
+    end
+
+    Main.AnchorPoint = Vector2.new(0.5, 0.5)
+    Main.Position = UDim2.new(0.5, 0, 0.5, 0) -- selalu di tengah
     Main.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     Main.BorderSizePixel = 0
     Main.Parent = ScreenGui
