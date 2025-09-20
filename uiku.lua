@@ -125,7 +125,6 @@ function Framework:CreateWindow(Settings)
     Logo.BackgroundTransparency = 1
     Logo.Image = "rbxassetid://71678601582898"
     Logo.Parent = UnhideBox
-    
 
      -- ⚡ Biar UnhideBox bisa digeser di PC & Mobile
     do
