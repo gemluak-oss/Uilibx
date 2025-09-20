@@ -117,7 +117,7 @@ function Framework:CreateWindow(Settings)
 
     -- 🔘 bikin sudut bulat
     local BoxCorner = Instance.new("UICorner")
-    BoxCorner.CornerRadius = UDim.new(0, 3) -- atur bulatnya (semakin besar semakin bulat)
+    BoxCorner.CornerRadius = UDim.new(0, 30) -- atur bulatnya (semakin besar semakin bulat)
     BoxCorner.Parent = UnhideBox
 
 
@@ -291,11 +291,13 @@ function Framework:CreateWindow(Settings)
             TabContent.CanvasSize = UDim2.new(0, 0, 0, ContentLayout.AbsoluteContentSize.Y)
         end)
 
+
         -- biar bisa scroll pakai mouse wheel langsung di area konten
         TabContent.ScrollingDirection = Enum.ScrollingDirection.Y -- hanya vertical
 
         -- biar bisa drag scroll di mobile
         TabContent.ScrollingDirection = Enum.ScrollingDirection.Y -- scroll vertikal
+
 
         -- simpan ke tabel
         Tabs[TabName] = TabContent
