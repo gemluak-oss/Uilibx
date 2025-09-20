@@ -6,6 +6,7 @@ local Framework = {}
 local Tabs = {}
 local tabCount = 0
 
+
 -- 🎬 Intro Custom (Typewriter + Glow + Outro Bertahap)
 local function ShowIntro()
     local IntroGui = Instance.new("ScreenGui")
@@ -27,18 +28,19 @@ local function ShowIntro()
 
     local Label = Instance.new("TextLabel")
     Label.Size = UDim2.new(1, 0, 1, 0)
-    Label.Text = ""
-    Label.Font = Enum.Font.SciFi
+    Label.Text = "RUINZ-UI"
+    Label.Font = Enum.Font.SciFi -- ⚡ ganti ke font SciFi
     Label.TextSize = 28
-    Label.TextColor3 = Color3.fromRGB(182, 245, 0)
+    Label.TextColor3 = Color3.fromRGB(255, 255, 255)
     Label.BackgroundTransparency = 1
-    Label.TextTransparency = 0 -- ✅ langsung visible
+    Label.TextTransparency = 1
     Label.Parent = Frame
+
 
     -- 🌟 Glow effect
     local UIStroke = Instance.new("UIStroke", Label)
     UIStroke.Thickness = 1.5
-    UIStroke.Color = Color3.fromRGB(182, 245, 0)
+    UIStroke.Color = Color3.fromRGB(0, 170, 255)
     UIStroke.Transparency = 0.5
 
     -- 🎞️ Tween masuk (kotak expand)
@@ -52,24 +54,24 @@ local function ShowIntro()
     task.delay(0.4, function()
         for i = 1, #fullText do
             Label.Text = string.sub(fullText, 1, i)
-            task.wait(0.08)
+            task.wait(0.08) -- kecepatan ketik
         end
     end)
 
-    -- Tunggu selesai + tampil sejenak
-    task.wait(3)
+     -- 🎞️ Outro (teks dulu → kotak, dengan buffer)
+    task.wait(2.5) -- jeda tampil
 
     -- Fade out teks + glow bersamaan
     local fadeText = TweenService:Create(Label, TweenInfo.new(0.6), {TextTransparency = 1})
     local fadeGlow = TweenService:Create(UIStroke, TweenInfo.new(0.6), {Transparency = 1})
     fadeText:Play()
     fadeGlow:Play()
-    fadeText.Completed:Wait()
+    fadeText.Completed:Wait()  -- tunggu fade selesai
 
-    -- 🔑 buffer biar glow benar-benar hilang
+    -- 🔑 kasih buffer 0.2 detik biar glow bener2 ilang
     task.wait(0.2)
 
-    -- Shrink kotak
+    -- Baru shrink kotaknya
     local tweenOut = TweenService:Create(Frame, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
         Size = UDim2.new(0, 0, 0, 0),
         BackgroundTransparency = 1
@@ -78,7 +80,9 @@ local function ShowIntro()
     tweenOut.Completed:Wait()
 
     IntroGui:Destroy()
+
 end
+
 
 
 -- 🏠 Create Window
