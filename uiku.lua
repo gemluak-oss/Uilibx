@@ -160,20 +160,6 @@ function Framework:CreateWindow(Settings)
         end)
     end
 
-
-    -- -- 🔄 Animasi RGB Outline
-    -- task.spawn(function()
-    --     local t = 0
-    --     while true do
-    --         t += 1
-    --         local r = math.sin(t/50) * 127 + 128
-    --         local g = math.sin(t/50 + 2) * 127 + 128
-    --         local b = math.sin(t/50 + 4) * 127 + 128
-    --         Outline.Color = Color3.fromRGB(r, g, b)
-    --         task.wait(0.03)
-    --     end
-    -- end)
-
     -- 🔄 Logic hide/unhide
     HideButton.MouseButton1Click:Connect(function()
         Main.Visible = false
@@ -305,24 +291,11 @@ function Framework:CreateWindow(Settings)
             TabContent.CanvasSize = UDim2.new(0, 0, 0, ContentLayout.AbsoluteContentSize.Y)
         end)
 
-
         -- biar bisa scroll pakai mouse wheel langsung di area konten
         TabContent.ScrollingDirection = Enum.ScrollingDirection.Y -- hanya vertical
 
         -- biar bisa drag scroll di mobile
         TabContent.ScrollingDirection = Enum.ScrollingDirection.Y -- scroll vertikal
-
-        -- layout isi tab
-        local ContentLayout = Instance.new("UIListLayout", TabContent)
-        ContentLayout.Padding = UDim.new(0, 8)
-        ContentLayout.FillDirection = Enum.FillDirection.Vertical
-        ContentLayout.SortOrder = Enum.SortOrder.LayoutOrder
-
-        -- auto update tinggi canvas
-        ContentLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-            TabContent.CanvasSize = UDim2.new(0, 0, 0, ContentLayout.AbsoluteContentSize.Y)
-        end)
-
 
         -- simpan ke tabel
         Tabs[TabName] = TabContent
