@@ -31,17 +31,10 @@ local function ShowIntro()
     Label.Text = "RuinzHub"
     Label.Font = Enum.Font.SciFi -- ⚡ ganti ke font SciFi
     Label.TextSize = 28
-    Label.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Label.TextColor3 = Color3.fromRGB(182, 245, 0)
     Label.BackgroundTransparency = 1
     Label.TextTransparency = 1
     Label.Parent = Frame
-
-
-    -- 🌟 Glow effect
-    local UIStroke = Instance.new("UIStroke", Label)
-    UIStroke.Thickness = 1
-    UIStroke.Color = Color3.fromRGB(182, 245, 0)
-    UIStroke.Transparency = 0.5
 
     -- 🎞️ Tween masuk (kotak expand)
     TweenService:Create(Frame, TweenInfo.new(0.8, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
