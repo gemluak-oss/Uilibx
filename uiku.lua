@@ -36,6 +36,13 @@ local function ShowIntro()
     Label.TextTransparency = 1
     Label.Parent = Frame
 
+        -- 🌟 Glow effect
+    local UIStroke = Instance.new("UIStroke", Label)
+    UIStroke.Thickness = 1.5
+    UIStroke.Color = Color3.fromRGB(182, 245, 0) -- sama kayak teks
+    UIStroke.Transparency = 0.5
+
+
     -- 🎞️ Tween masuk (kotak expand)
     TweenService:Create(Frame, TweenInfo.new(0.8, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
         Size = UDim2.new(0, 300, 0, 100),
