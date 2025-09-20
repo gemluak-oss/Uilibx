@@ -39,9 +39,9 @@ local function ShowIntro()
 
     -- 🌟 Glow effect
     local UIStroke = Instance.new("UIStroke", Label)
-    UIStroke.Thickness = 1.5
+    UIStroke.Thickness = 0
     UIStroke.Color = Color3.fromRGB(0, 170, 255)
-    UIStroke.Transparency = 0.5
+    UIStroke.Transparency = 0
 
     -- 🎞️ Tween masuk (kotak expand)
     TweenService:Create(Frame, TweenInfo.new(0.8, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
