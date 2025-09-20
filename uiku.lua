@@ -218,7 +218,7 @@ function Framework:CreateWindow(Settings)
 
     -- 📑 Tab bar
     local TabButtons = Instance.new("ScrollingFrame")
-    TabButtons.Size = UDim2.new(1, -20, 0, 35)
+    TabButtons.Size = UDim2.new(1, -20, 0, 25) -- tinggi 25px
     TabButtons.Position = UDim2.new(0, 10, 0, 45)
     TabButtons.BackgroundTransparency = 1
     TabButtons.ScrollBarThickness = 0
@@ -254,10 +254,10 @@ function Framework:CreateWindow(Settings)
 
         -- Tombol tab
         local TabButton = Instance.new("TextButton")
-        TabButton.Size = UDim2.new(0, 50, 0, 15)
+        TabButton.Size = UDim2.new(0, 70, 0, 25) -- lebar 70, tinggi 25
         TabButton.Text = TabName
         TabButton.Font = Enum.Font.Gotham
-        TabButton.TextSize = 14
+        TabButton.TextSize = 12
         TabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
         TabButton.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
         TabButton.AutoButtonColor = false
