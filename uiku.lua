@@ -7,6 +7,7 @@ local Tabs = {}
 local tabCount = 0
 
 -- 🎬 Intro Custom (Center + Animasi Fix + Outro Bertahap)
+-- 🎬 Intro Custom (Typewriter + Glow + Outro Bertahap)
 local function ShowIntro()
     local IntroGui = Instance.new("ScreenGui")
     IntroGui.Name = "IntroGui"
@@ -27,36 +28,41 @@ local function ShowIntro()
 
     local Label = Instance.new("TextLabel")
     Label.Size = UDim2.new(1, 0, 1, 0)
-    Label.Text = "RUINZ-UI"
+    Label.Text = "" -- kosong dulu (typewriter)
     Label.Font = Enum.Font.GothamBold
     Label.TextSize = 24
     Label.TextColor3 = Color3.fromRGB(255,255,255)
     Label.BackgroundTransparency = 1
-    Label.TextTransparency = 1
+    Label.TextTransparency = 0
     Label.Parent = Frame
 
-    -- 🌟 Glow
+    -- 🌟 Glow effect
     local UIStroke = Instance.new("UIStroke", Label)
     UIStroke.Thickness = 1.5
     UIStroke.Color = Color3.fromRGB(0, 170, 255)
     UIStroke.Transparency = 0.5
 
-    -- 🎞️ Tween masuk
+    -- 🎞️ Tween masuk (kotak expand)
     TweenService:Create(Frame, TweenInfo.new(0.8, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
         Size = UDim2.new(0, 300, 0, 100),
         BackgroundTransparency = 0
     }):Play()
 
+    -- 🎹 Typewriter effect
+    local fullText = "RUINZ-UI"
     task.delay(0.4, function()
-        TweenService:Create(Label, TweenInfo.new(1), {TextTransparency = 0}):Play()
+        for i = 1, #fullText do
+            Label.Text = string.sub(fullText, 1, i)
+            task.wait(0.08) -- kecepatan ketik
+        end
     end)
 
-    task.wait(2.5)
+    task.wait(3)
 
     -- 🎞️ Fade out teks dulu
     local fadeText = TweenService:Create(Label, TweenInfo.new(0.6), {TextTransparency = 1})
     fadeText:Play()
-    fadeText.Completed:Wait() -- tunggu selesai
+    fadeText.Completed:Wait()
 
     -- 🎞️ Baru kotak out
     local tweenOut = TweenService:Create(Frame, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
