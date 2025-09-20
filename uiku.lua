@@ -31,7 +31,7 @@ local function ShowIntro()
     Label.Text = "RUINZ-UI"
     Label.Font = Enum.Font.SciFi -- ⚡ ganti ke font SciFi
     Label.TextSize = 28
-    Label.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Label.TextColor3 = Color3.fromRGB(0, 255, 128)
     Label.BackgroundTransparency = 1
     Label.TextTransparency = 1
     Label.Parent = Frame
@@ -39,8 +39,8 @@ local function ShowIntro()
 
     -- 🌟 Glow effect
     local UIStroke = Instance.new("UIStroke", Label)
-    UIStroke.Thickness = 0
-    UIStroke.Color = Color3.fromRGB(0, 170, 255)
+    UIStroke.Thickness = 1.5
+    UIStroke.Color = Color3.fromRGB(0, 255, 128)
     UIStroke.Transparency = 0
 
     -- 🎞️ Tween masuk (kotak expand)
