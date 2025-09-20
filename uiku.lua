@@ -49,7 +49,7 @@ local function ShowIntro()
     }):Play()
 
     -- 🎹 Typewriter effect
-    local fullText = "RUINZ-UI"
+    local fullText = "RuinzHub"
     task.delay(0.4, function()
         for i = 1, #fullText do
             Label.Text = string.sub(fullText, 1, i)
@@ -57,7 +57,7 @@ local function ShowIntro()
         end
     end)
 
-    -- 🎞️ Outro (teks dulu → kotak)
+     -- 🎞️ Outro (teks dulu → kotak, dengan buffer)
     task.wait(2.5) -- jeda tampil
 
     -- Fade out teks + glow bersamaan
@@ -65,7 +65,10 @@ local function ShowIntro()
     local fadeGlow = TweenService:Create(UIStroke, TweenInfo.new(0.6), {Transparency = 1})
     fadeText:Play()
     fadeGlow:Play()
-    fadeText.Completed:Wait()
+    fadeText.Completed:Wait()  -- tunggu fade selesai
+
+    -- 🔑 kasih buffer 0.2 detik biar glow bener2 ilang
+    task.wait(0.2)
 
     -- Baru shrink kotaknya
     local tweenOut = TweenService:Create(Frame, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
@@ -76,7 +79,7 @@ local function ShowIntro()
     tweenOut.Completed:Wait()
 
     IntroGui:Destroy()
-    
+
 end
 
 
