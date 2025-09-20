@@ -104,22 +104,20 @@ function Framework:CreateWindow(Settings)
     end)
 
 
-        -- 🔲 Tombol Unhide (atas tengah, logo aja)
+    -- 🔲 Tombol Unhide (atas tengah, logo aja)
     local UnhideBox = Instance.new("ImageButton")
-    UnhideBox.Size = UDim2.new(0, 50, 0, 50) -- ukuran logo
+    UnhideBox.Size = UDim2.new(0, 50, 0, 50) -- sesuaikan ukuran logo
     UnhideBox.AnchorPoint = Vector2.new(0.5, 0)
     UnhideBox.Position = UDim2.new(0.5, 0, 0, 10) -- atas tengah
-    UnhideBox.BackgroundTransparency = 0 -- biar ada background buat corner
-    UnhideBox.BackgroundColor3 = Color3.fromRGB(30,30,30) -- opsional (warna abu gelap)
+    UnhideBox.BackgroundTransparency = 1 -- transparan
     UnhideBox.Image = "rbxassetid://71678601582898" -- ganti dengan asset ID logomu
     UnhideBox.Visible = false
     UnhideBox.Parent = ScreenGui
 
     -- 🔘 bikin sudut bulat
     local BoxCorner = Instance.new("UICorner")
-    BoxCorner.CornerRadius = UDim.new(0, 30) -- atur bulatnya (semakin besar semakin bulat)
+    BoxCorner.CornerRadius = UDim.new(0, 12) -- atur bulatnya (semakin besar semakin bulat)
     BoxCorner.Parent = UnhideBox
-
 
      -- ⚡ Biar UnhideBox bisa digeser di PC & Mobile
     do
@@ -159,6 +157,20 @@ function Framework:CreateWindow(Settings)
             end
         end)
     end
+
+
+    -- 🔄 Animasi RGB Outline
+    task.spawn(function()
+        local t = 0
+        while true do
+            t += 1
+            local r = math.sin(t/50) * 127 + 128
+            local g = math.sin(t/50 + 2) * 127 + 128
+            local b = math.sin(t/50 + 4) * 127 + 128
+            Outline.Color = Color3.fromRGB(r, g, b)
+            task.wait(0.03)
+        end
+    end)
 
     -- 🔄 Logic hide/unhide
     HideButton.MouseButton1Click:Connect(function()
@@ -297,6 +309,17 @@ function Framework:CreateWindow(Settings)
 
         -- biar bisa drag scroll di mobile
         TabContent.ScrollingDirection = Enum.ScrollingDirection.Y -- scroll vertikal
+
+        -- layout isi tab
+        local ContentLayout = Instance.new("UIListLayout", TabContent)
+        ContentLayout.Padding = UDim.new(0, 8)
+        ContentLayout.FillDirection = Enum.FillDirection.Vertical
+        ContentLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+        -- auto update tinggi canvas
+        ContentLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+            TabContent.CanvasSize = UDim2.new(0, 0, 0, ContentLayout.AbsoluteContentSize.Y)
+        end)
 
 
         -- simpan ke tabel
