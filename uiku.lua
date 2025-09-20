@@ -7,7 +7,7 @@ local Tabs = {}
 local tabCount = 0
 
 
--- 🎬 Intro Custom
+-- 🎬 Intro Custom (lebih keren)
 local function ShowIntro()
     local IntroGui = Instance.new("ScreenGui")
     IntroGui.Name = "IntroGui"
@@ -16,29 +16,57 @@ local function ShowIntro()
     local Frame = Instance.new("Frame")
     Frame.Size = UDim2.new(0, 300, 0, 100)
     Frame.Position = UDim2.new(0.5, -150, 0.5, -50)
+    Frame.AnchorPoint = Vector2.new(0.5, 0.5)
     Frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    Frame.BackgroundTransparency = 1
     Frame.Parent = IntroGui
+
+    local UICorner = Instance.new("UICorner", Frame)
+    UICorner.CornerRadius = UDim.new(0, 12)
 
     local Label = Instance.new("TextLabel")
     Label.Size = UDim2.new(1, 0, 1, 0)
     Label.Text = "RUINZ-UI"
     Label.Font = Enum.Font.GothamBold
-    Label.TextSize = 20
-    Label.TextColor3 = Color3.fromRGB(255,255,255)
+    Label.TextSize = 24
+    Label.TextColor3 = Color3.fromRGB(255, 255, 255)
     Label.BackgroundTransparency = 1
+    Label.TextTransparency = 1
     Label.Parent = Frame
 
-    Frame.BackgroundTransparency = 1
-    local tweenIn = TweenService:Create(Frame, TweenInfo.new(0.8), {BackgroundTransparency = 0})
+    -- 🌟 Glow effect
+    local UIStroke = Instance.new("UIStroke", Label)
+    UIStroke.Thickness = 1.5
+    UIStroke.Color = Color3.fromRGB(0, 170, 255) -- biru neon
+    UIStroke.Transparency = 0.5
+
+    -- Animasi scale masuk
+    Frame.Size = UDim2.new(0, 0, 0, 0)
+    local tweenIn = TweenService:Create(Frame, TweenInfo.new(0.8, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+        Size = UDim2.new(0, 300, 0, 100),
+        BackgroundTransparency = 0
+    })
     tweenIn:Play()
 
-    task.wait(2)
+    -- Fade in teks
+    task.delay(0.5, function()
+        TweenService:Create(Label, TweenInfo.new(1), {TextTransparency = 0}):Play()
+    end)
 
-    local tweenOut = TweenService:Create(Frame, TweenInfo.new(0.8), {BackgroundTransparency = 1})
+    task.wait(2.5)
+
+    -- Fade out + shrink
+    local tweenOut = TweenService:Create(Frame, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
+        Size = UDim2.new(0, 0, 0, 0),
+        BackgroundTransparency = 1
+    })
+    TweenService:Create(Label, TweenInfo.new(0.5), {TextTransparency = 1}):Play()
     tweenOut:Play()
     tweenOut.Completed:Wait()
+
     IntroGui:Destroy()
 end
+
 
 -- 🏠 Create Window
 function Framework:CreateWindow(Settings)
