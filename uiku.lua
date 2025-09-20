@@ -6,7 +6,6 @@ local Framework = {}
 local Tabs = {}
 local tabCount = 0
 
-
 -- 🎬 Intro Custom (Typewriter + Glow + Outro Bertahap)
 local function ShowIntro()
     local IntroGui = Instance.new("ScreenGui")
@@ -28,20 +27,19 @@ local function ShowIntro()
 
     local Label = Instance.new("TextLabel")
     Label.Size = UDim2.new(1, 0, 1, 0)
-    Label.Text = "RuinzHub"
-    Label.Font = Enum.Font.SciFi -- ⚡ ganti ke font SciFi
+    Label.Text = ""
+    Label.Font = Enum.Font.SciFi
     Label.TextSize = 28
     Label.TextColor3 = Color3.fromRGB(182, 245, 0)
     Label.BackgroundTransparency = 1
-    Label.TextTransparency = 1
+    Label.TextTransparency = 0 -- ✅ langsung visible
     Label.Parent = Frame
 
-        -- 🌟 Glow effect
+    -- 🌟 Glow effect
     local UIStroke = Instance.new("UIStroke", Label)
     UIStroke.Thickness = 1.5
-    UIStroke.Color = Color3.fromRGB(182, 245, 0) -- sama kayak teks
+    UIStroke.Color = Color3.fromRGB(182, 245, 0)
     UIStroke.Transparency = 0.5
-
 
     -- 🎞️ Tween masuk (kotak expand)
     TweenService:Create(Frame, TweenInfo.new(0.8, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
@@ -54,24 +52,24 @@ local function ShowIntro()
     task.delay(0.4, function()
         for i = 1, #fullText do
             Label.Text = string.sub(fullText, 1, i)
-            task.wait(0.08) -- kecepatan ketik
+            task.wait(0.08)
         end
     end)
 
-     -- 🎞️ Outro (teks dulu → kotak, dengan buffer)
-    task.wait(2.5) -- jeda tampil
+    -- Tunggu selesai + tampil sejenak
+    task.wait(3)
 
     -- Fade out teks + glow bersamaan
     local fadeText = TweenService:Create(Label, TweenInfo.new(0.6), {TextTransparency = 1})
     local fadeGlow = TweenService:Create(UIStroke, TweenInfo.new(0.6), {Transparency = 1})
     fadeText:Play()
     fadeGlow:Play()
-    fadeText.Completed:Wait()  -- tunggu fade selesai
+    fadeText.Completed:Wait()
 
-    -- 🔑 kasih buffer 0.2 detik biar glow bener2 ilang
+    -- 🔑 buffer biar glow benar-benar hilang
     task.wait(0.2)
 
-    -- Baru shrink kotaknya
+    -- Shrink kotak
     local tweenOut = TweenService:Create(Frame, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
         Size = UDim2.new(0, 0, 0, 0),
         BackgroundTransparency = 1
@@ -80,9 +78,7 @@ local function ShowIntro()
     tweenOut.Completed:Wait()
 
     IntroGui:Destroy()
-
 end
-
 
 
 -- 🏠 Create Window
