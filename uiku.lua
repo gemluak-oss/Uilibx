@@ -1,5 +1,7 @@
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
+local GuiService = game:GetService("GuiService")
+local screenSize = workspace.CurrentCamera.ViewportSize
 local Framework = {}
 local Tabs = {}
 local tabCount = 0
@@ -46,18 +48,19 @@ function Framework:CreateWindow(Settings)
     ScreenGui.Name = Settings.Name or "RuinzUI"
     ScreenGui.Parent = game:GetService("CoreGui")
 
-    -- Main window gaya Rayfield (PC & Mobile support)
+    -- Main window
     local Main = Instance.new("Frame")
+
     if UserInputService.TouchEnabled then
-        -- 📱 Mobile → lebih kecil
-        Main.Size = UDim2.new(0, 350, 0, 280)
+        -- 📱 Mobile: window lebih kecil & proporsional
+        Main.Size = UDim2.new(0, math.clamp(screenSize.X * 0.7, 280, 380), 0, math.clamp(screenSize.Y * 0.5, 220, 300))
     else
-        -- 💻 PC → normal
+        -- 💻 PC: window lebih besar
         Main.Size = UDim2.new(0, 450, 0, 350)
     end
 
     Main.AnchorPoint = Vector2.new(0.5, 0.5)
-    Main.Position = UDim2.new(0.5, 0, 0.5, 0) -- selalu di tengah
+    Main.Position = UDim2.new(0.5, 0, 0.5, 0)
     Main.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     Main.BorderSizePixel = 0
     Main.Parent = ScreenGui
