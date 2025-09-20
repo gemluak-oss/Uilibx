@@ -114,12 +114,17 @@ function Framework:CreateWindow(Settings)
     UnhideBox.Visible = false
     UnhideBox.Parent = ScreenGui
 
-    -- Outline RGB
-    local Outline = Instance.new("UIStroke")
-    Outline.Thickness = 2
-    Outline.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-    Outline.Transparency = 0.2 -- sedikit transparan
-    Outline.Parent = UnhideBox
+    -- 🔘 bikin sudut bulat
+    local BoxCorner = Instance.new("UICorner")
+    BoxCorner.CornerRadius = UDim.new(0, 12) -- atur bulatnya (semakin besar semakin bulat)
+    BoxCorner.Parent = UnhideBox
+
+    -- -- Outline RGB
+    -- local Outline = Instance.new("UIStroke")
+    -- Outline.Thickness = 2
+    -- Outline.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    -- Outline.Transparency = 0.2 -- sedikit transparan
+    -- Outline.Parent = UnhideBox
 
      -- ⚡ Biar UnhideBox bisa digeser di PC & Mobile
     do
