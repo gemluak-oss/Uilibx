@@ -114,10 +114,6 @@ function Framework:CreateWindow(Settings)
     UnhideBox.Visible = false
     UnhideBox.Parent = ScreenGui
 
-    -- Oval penuh
-    local BoxCorner = Instance.new("UICorner", UnhideBox)
-    BoxCorner.CornerRadius = UDim.new(1, 0)
-
     -- Outline RGB
     local Outline = Instance.new("UIStroke")
     Outline.Thickness = 2
