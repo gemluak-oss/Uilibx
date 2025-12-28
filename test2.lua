@@ -1,6 +1,3 @@
--- filename: 
--- version: lua51
--- line: [0, 0] id: 0
 local r0_0 = {
   Players = game:GetService("Players"),
   RunService = game:GetService("RunService"),
